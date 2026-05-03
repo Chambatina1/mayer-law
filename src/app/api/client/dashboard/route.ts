@@ -31,7 +31,8 @@ export async function GET(request: Request) {
       }),
       db.invoice.findMany({
         where: { clientId: client.id },
-        orderBy: { createdAt: 'desc' }),
+        orderBy: { createdAt: 'desc' },
+      }),
     ])
 
     const unreadMessages = messages.filter(m => !m.read && m.sender === 'admin').length

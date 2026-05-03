@@ -56,6 +56,12 @@
   --color-sand: #E0D5CF;
   --color-sage: #C8C0B8;
   --color-white: #FFFFFF;
+  /* Aliases for component compatibility */
+  --color-soft-gold: #C17B6E;
+  --color-warm-gold: #A8645A;
+  --color-dark-gold: #8B5248;
+  --color-beige: #E0D5CF;
+  --color-soft-rose: #C17B6E;
 }
 
 :root {

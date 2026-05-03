@@ -41,7 +41,7 @@ export default function BookingPage() {
     bookingStep, selectedService, selectedDate, selectedTime,
     bookingName, bookingEmail, bookingPhone, bookingNotes,
     setBookingStep, setBookingService, setBookingDate, setBookingTime,
-    setBookingDetails, resetBooking, setView
+    setBookingField, resetBooking, setView
   } = useAppStore()
 
   const [submitting, setSubmitting] = useState(false)
@@ -304,7 +304,7 @@ export default function BookingPage() {
                       id="bk-name"
                       placeholder="Your name"
                       value={bookingName}
-                      onChange={(e) => setBookingDetails({ name: e.target.value })}
+                      onChange={(e) => setBookingField('bookingName', e.target.value)}
                       className="border-beige focus:border-soft-gold rounded-xl"
                     />
                   </div>
@@ -315,7 +315,7 @@ export default function BookingPage() {
                       type="email"
                       placeholder="your@email.com"
                       value={bookingEmail}
-                      onChange={(e) => setBookingDetails({ email: e.target.value })}
+                      onChange={(e) => setBookingField('bookingEmail', e.target.value)}
                       className="border-beige focus:border-soft-gold rounded-xl"
                     />
                   </div>
@@ -327,7 +327,7 @@ export default function BookingPage() {
                     type="tel"
                     placeholder="(555) 000-0000"
                     value={bookingPhone}
-                    onChange={(e) => setBookingDetails({ phone: e.target.value })}
+                    onChange={(e) => setBookingField('bookingPhone', e.target.value)}
                     className="border-beige focus:border-soft-gold rounded-xl"
                   />
                 </div>
@@ -340,7 +340,7 @@ export default function BookingPage() {
                     placeholder="Tell us briefly about your situation..."
                     rows={4}
                     value={bookingNotes}
-                    onChange={(e) => setBookingDetails({ notes: e.target.value })}
+                    onChange={(e) => setBookingField('bookingNotes', e.target.value)}
                     className="border-beige focus:border-soft-gold rounded-xl resize-none"
                   />
                 </div>
