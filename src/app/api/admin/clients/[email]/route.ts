@@ -8,26 +8,32 @@ export async function GET(
   try {
     const { email } = await params
 
-    const client = await db.client.findUnique({
-      where: { email },
-      include: {
-        documents: { orderBy: { uploadedAt: 'desc' } },
-        messages: { orderBy: { createdAt: 'asc' } },
-        invoices: { orderBy: { createdAt: 'desc' } },
-      },
-    })
+    const client = await db.client.findUnique({ where: { email } })
 
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 })
     }
 
-    const appointments = await db.appointment.findMany({
-      where: { clientEmail: email },
-      orderBy: { createdAt: 'desc' },
-      include: { documents: true },
-    })
+    const [appointments, documents, messages, invoices] = await Promise.all([
+      db.appointment.findMany({
+        where: { clientEmail: email },
+        orderBy: { createdAt: 'desc' },
+      }),
+      db.clientDocument.findMany({
+        where: { clientId: client.id },
+        orderBy: { uploadedAt: 'desc' },
+      }),
+      db.clientMessage.findMany({
+        where: { clientId: client.id },
+        orderBy: { createdAt: 'asc' },
+      }),
+      db.invoice.findMany({
+        where: { clientId: client.id },
+        orderBy: { createdAt: 'desc' },
+      }),
+    ])
 
-    return NextResponse.json({ ...client, appointments })
+    return NextResponse.json({ ...client, appointments, documents, messages, invoices })
   } catch (error) {
     console.error('Error fetching client:', error)
     return NextResponse.json({ error: 'Failed to fetch client' }, { status: 500 })

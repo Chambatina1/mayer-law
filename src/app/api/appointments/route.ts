@@ -5,90 +5,51 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
     const {
-      clientName, clientEmail, clientPhone, contactPref,
-      streetAddress, city, state, zip, county,
-      service, caseDescription, issueDate, prevAttorney,
-      hasCourtDeadline, courtDeadline, referralSource, urgency,
-      consentGiven, privacyConsent, date, time, documents,
+      name, email, phone, service, notes, date, time,
+      clientName, clientEmail, clientPhone,
     } = body
 
-    if (!clientName || !clientEmail || !clientPhone || !service || !caseDescription || !date || !time) {
+    const finalName = name || clientName || ''
+    const finalEmail = email || clientEmail || ''
+    const finalPhone = phone || clientPhone || ''
+    const finalService = service || ''
+    const finalNotes = notes || ''
+    const finalDate = date || ''
+    const finalTime = time || ''
+
+    if (!finalName || !finalEmail || !finalPhone || !finalService || !finalDate || !finalTime) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    if (!consentGiven || !privacyConsent) {
-      return NextResponse.json({ error: 'Consent is required' }, { status: 400 })
-    }
-
     // Create or update client
-    await db.client.upsert({
-      where: { email: clientEmail },
-      update: {
-        name: clientName,
-        phone: clientPhone,
-        contactPref: contactPref || 'email',
-        streetAddress: streetAddress || undefined,
-        city: city || undefined,
-        state: state || 'FL',
-        zip: zip || undefined,
-        county: county || undefined,
-        referralSource: referralSource || undefined,
-        tags: service,
-      },
-      create: {
-        name: clientName,
-        email: clientEmail,
-        phone: clientPhone,
-        contactPref: contactPref || 'email',
-        streetAddress: streetAddress || undefined,
-        city: city || undefined,
-        state: state || 'FL',
-        zip: zip || undefined,
-        county: county || undefined,
-        referralSource: referralSource || undefined,
-        tags: service,
-      },
-    })
+    const existingClient = await db.client.findUnique({ where: { email: finalEmail } })
+    if (existingClient) {
+      await db.client.update({
+        where: { email: finalEmail },
+        data: { name: finalName, phone: finalPhone },
+      })
+    } else {
+      await db.client.create({
+        data: { name: finalName, email: finalEmail, phone: finalPhone },
+      })
+    }
 
     const appointment = await db.appointment.create({
       data: {
-        clientEmail,
-        clientName,
-        clientPhone,
-        contactPref: contactPref || 'email',
-        streetAddress: streetAddress || undefined,
-        city: city || undefined,
-        state: state || 'FL',
-        zip: zip || undefined,
-        county: county || undefined,
-        service,
-        caseDescription,
-        issueDate: issueDate || undefined,
-        prevAttorney: prevAttorney || false,
-        courtDeadline: hasCourtDeadline ? courtDeadline : null,
-        referralSource: referralSource || undefined,
-        urgency: urgency || 3,
-        consentGiven: true,
-        privacyConsent: true,
-        date,
-        time,
+        name: finalName,
+        email: finalEmail,
+        phone: finalPhone,
+        clientName: finalName,
+        clientEmail: finalEmail,
+        clientPhone: finalPhone,
+        service: finalService,
+        caseDescription: finalNotes,
+        notes: finalNotes,
+        date: finalDate,
+        time: finalTime,
         status: 'confirmed',
-        confirmedAt: new Date(),
       },
     })
-
-    // Create documents if provided
-    if (documents && Array.isArray(documents) && documents.length > 0) {
-      await db.appointmentDocument.createMany({
-        data: documents.map((doc: { fileName: string; fileSize?: string; fileType?: string; fileData?: string }) => ({
-          appointmentId: appointment.id,
-          fileName: doc.fileName,
-          fileSize: doc.fileSize,
-          fileType: doc.fileType,
-          fileData: doc.fileData,
-        })),
-      })
-    }
 
     return NextResponse.json(appointment, { status: 201 })
   } catch (error) {
@@ -110,7 +71,6 @@ export async function GET(request: Request) {
     const appointments = await db.appointment.findMany({
       where,
       orderBy: { createdAt: 'desc' },
-      include: { documents: true },
     })
     return NextResponse.json(appointments)
   } catch (error) {

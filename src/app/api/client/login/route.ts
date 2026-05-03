@@ -26,7 +26,6 @@ export async function POST(request: Request) {
     const appointments = await db.appointment.findMany({
       where: { clientEmail: email },
       orderBy: { createdAt: 'desc' },
-      include: { documents: true },
     })
 
     const documents = await db.clientDocument.findMany({

@@ -19,7 +19,6 @@ export async function GET(request: Request) {
       db.appointment.findMany({
         where: { clientEmail: email },
         orderBy: { createdAt: 'desc' },
-        include: { documents: true },
       }),
       db.clientDocument.findMany({
         where: { clientId: client.id },
