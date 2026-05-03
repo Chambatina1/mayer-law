@@ -64,7 +64,7 @@ export default function AdminLogin() {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-light-gray hover:text-medium-gray"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-medium-gray hover:text-charcoal"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -77,7 +77,7 @@ export default function AdminLogin() {
         <div className="mt-6 pt-6 border-t border-beige">
           <Button variant="ghost" onClick={() => setView('website')} className="text-medium-gray hover:text-charcoal">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Website
+            Back to Home
           </Button>
         </div>
       </motion.div>

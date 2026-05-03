@@ -112,7 +112,7 @@ export default function AboutSection() {
             <div className="accent-line mb-6" />
 
             <p className="text-medium-gray leading-relaxed mb-4">
-              Founded by Nicole Mayer in 2020, Mayer Law, P.A. brings over 20 years of legal experience to every case. Based in Maitland, Florida, we specialize in Consumer Finance, Education Law & Civil Rights, Personal Injury, and General Litigation.
+              Founded by Nicole Mayer in 2020, Mayer Law Florida brings over 20 years of legal experience to every case. Based in Maitland, Florida, we specialize in Consumer Finance, Education Law & Civil Rights, Personal Injury, and General Litigation.
             </p>
             <p className="text-medium-gray leading-relaxed mb-8">
               Our approach is simple: we fight for what is right with resourceful strategies and relentless determination. Every client deserves an attorney who will go the distance — and that is exactly what we deliver.

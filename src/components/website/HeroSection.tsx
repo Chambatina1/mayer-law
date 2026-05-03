@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Calendar, ArrowRight, Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
+import { Calendar, ArrowRight, Phone, Mail, MapPin } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAppStore } from '@/store/useAppStore'
 
@@ -25,8 +25,8 @@ export default function HeroSection() {
           alt=""
           className="w-full h-full object-cover"
         />
-        {/* Strong overlay for text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70" />
+        {/* Light overlay for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/50" />
       </div>
 
       {/* Content */}
@@ -41,9 +41,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white/90 text-xs sm:text-sm tracking-wider uppercase mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 backdrop-blur-md border border-charcoal/10 rounded-full text-charcoal text-xs sm:text-sm tracking-wider uppercase mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             AVAILABLE FOR CONSULTATION
           </motion.div>
 
@@ -52,9 +52,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal leading-tight mb-4"
           >
-            Mayer Law Is Here{' '}
+            Mayer Law Florida Is Here{' '}
             <span className="text-rose-gradient">For You</span>
           </motion.h1>
 
@@ -62,7 +62,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-xl sm:text-2xl text-white/90 font-medium mb-2"
+            className="text-xl sm:text-2xl text-charcoal font-medium mb-2"
           >
             Resourcefully Relentless Legal Representation
           </motion.p>
@@ -71,7 +71,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed"
+            className="text-base sm:text-lg text-charcoal/70 max-w-2xl mx-auto mb-8 leading-relaxed"
           >
             Protecting your rights. Empowering your future.
           </motion.p>
@@ -91,7 +91,7 @@ export default function HeroSection() {
             ].map((phrase) => (
               <span
                 key={phrase}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full text-white/90 text-xs sm:text-sm font-medium"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-charcoal/10 rounded-full text-charcoal text-xs sm:text-sm font-medium"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
                 {phrase}
@@ -119,7 +119,7 @@ export default function HeroSection() {
               variant="outline"
               size="lg"
               onClick={() => handleNavClick('#practice-areas')}
-              className="rounded-full px-8 py-6 text-base border-white/30 text-white hover:bg-white hover:text-charcoal transition-all"
+              className="rounded-full px-8 py-6 text-base border-charcoal/30 text-charcoal hover:bg-charcoal/10 transition-all"
             >
               View Our Services
             </Button>
@@ -132,44 +132,44 @@ export default function HeroSection() {
             transition={{ delay: 1, duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <p className="text-white/50 text-xs tracking-[0.2em] uppercase mb-5 font-medium">
+            <p className="text-charcoal/50 text-xs tracking-[0.2em] uppercase mb-5 font-medium">
               Three Ways to Reach Us
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Phone */}
               <a
                 href="tel:3524943657"
-                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+                className="group flex flex-col items-center gap-2 p-5 bg-white/80 backdrop-blur-sm border border-charcoal/10 rounded-2xl hover:bg-white hover:border-charcoal/20 transition-all"
               >
                 <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
                   <Phone className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-white/90 text-sm font-semibold">Call Us Directly</p>
-                <p className="text-white/60 text-xs">(352) 494-3657</p>
+                <p className="text-charcoal text-sm font-semibold">Call Us Directly</p>
+                <p className="text-charcoal/60 text-xs">(352) 494-3657</p>
               </a>
 
               {/* Email */}
               <a
                 href="mailto:Nicole@MayerLawFlorida.com"
-                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+                className="group flex flex-col items-center gap-2 p-5 bg-white/80 backdrop-blur-sm border border-charcoal/10 rounded-2xl hover:bg-white hover:border-charcoal/20 transition-all"
               >
                 <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
                   <Mail className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-white/90 text-sm font-semibold">Send an Email</p>
-                <p className="text-white/60 text-xs">Nicole@MayerLawFlorida.com</p>
+                <p className="text-charcoal text-sm font-semibold">Send an Email</p>
+                <p className="text-charcoal/60 text-xs">Nicole@MayerLawFlorida.com</p>
               </a>
 
               {/* In-Person / Online */}
               <button
                 onClick={() => setView('booking')}
-                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+                className="group flex flex-col items-center gap-2 p-5 bg-white/80 backdrop-blur-sm border border-charcoal/10 rounded-2xl hover:bg-white hover:border-charcoal/20 transition-all"
               >
                 <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
                   <MapPin className="w-5 h-5 text-white" />
                 </div>
-                <p className="text-white/90 text-sm font-semibold">Book Online</p>
-                <p className="text-white/60 text-xs">In-Person & Virtual</p>
+                <p className="text-charcoal text-sm font-semibold">Book Online</p>
+                <p className="text-charcoal/60 text-xs">In-Person & Virtual</p>
               </button>
             </div>
           </motion.div>
@@ -179,7 +179,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 0.6 }}
-            className="mt-8 text-white/40 text-xs tracking-wide max-w-md mx-auto"
+            className="mt-8 text-charcoal/40 text-xs tracking-wide max-w-md mx-auto"
           >
             Most clients prefer in-person consultations. Virtual appointments also available upon request.
           </motion.p>
@@ -195,9 +195,9 @@ export default function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
-            className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center pt-2"
+            className="w-6 h-10 border-2 border-charcoal/30 rounded-full flex justify-center pt-2"
           >
-            <div className="w-1.5 h-1.5 bg-white/60 rounded-full" />
+            <div className="w-1.5 h-1.5 bg-charcoal/60 rounded-full" />
           </motion.div>
         </motion.div>
       </div>

@@ -138,7 +138,7 @@ export default function PortalLogin() {
             <Button type="submit" disabled={loading} className="w-full bg-soft-gold hover:bg-warm-gold text-white rounded-xl py-6 font-medium">
               {loading ? 'Signing in...' : <><Mail className="w-4 h-4 mr-2" />Send Magic Link</>}
             </Button>
-            <p className="text-center text-xs text-light-gray">We&apos;ll auto-create an account if you&apos;re new.</p>
+            <p className="text-center text-xs text-medium-gray">We&apos;ll auto-create an account if you&apos;re new.</p>
             <button type="button" onClick={() => setShowRegister(true)} className="w-full text-center text-sm text-medium-gray hover:text-soft-gold transition-colors">
               New client? Register here
             </button>
@@ -152,7 +152,7 @@ export default function PortalLogin() {
             className="w-full text-medium-gray hover:text-charcoal"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Website
+            Back to Home
           </Button>
         </div>
       </motion.div>

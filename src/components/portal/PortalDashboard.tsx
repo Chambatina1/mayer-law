@@ -138,6 +138,7 @@ export default function PortalDashboard() {
           <h1 className="font-serif text-lg font-semibold text-charcoal">Client Portal</h1>
           <Button variant="ghost" onClick={() => setView('website')} className="text-medium-gray hover:text-charcoal">
             <X className="w-4 h-4" />
+            Home
           </Button>
         </div>
       </div>
@@ -219,7 +220,7 @@ export default function PortalDashboard() {
             <div className="bg-white rounded-2xl border border-beige overflow-hidden">
               <div className="h-80 max-h-96 overflow-y-auto p-4 space-y-3">
                 {data.messages.length === 0 ? (
-                  <div className="text-center text-light-gray py-12">
+                  <div className="text-center text-medium-gray py-12">
                     <MessageSquare className="w-8 h-8 mx-auto mb-2 opacity-30" />
                     <p className="text-sm">No messages yet. Start the conversation!</p>
                   </div>
@@ -232,7 +233,7 @@ export default function PortalDashboard() {
                           : 'bg-cream text-charcoal rounded-bl-md'
                       }`}>
                         <p className="text-sm">{msg.message}</p>
-                        <p className={`text-[10px] mt-1 ${msg.sender === 'client' ? 'text-white/60' : 'text-light-gray'}`}>
+                        <p className={`text-[10px] mt-1 ${msg.sender === 'client' ? 'text-white/60' : 'text-medium-gray'}`}>
                           {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           <span className="ml-1.5">{msg.sender === 'client' ? 'You' : 'Attorney'}</span>
                         </p>
@@ -261,7 +262,7 @@ export default function PortalDashboard() {
             <div className="bg-white rounded-2xl border border-beige overflow-hidden">
               <div className="max-h-96 overflow-y-auto">
                 {data.documents.length === 0 ? (
-                  <div className="text-center text-light-gray py-12">
+                  <div className="text-center text-medium-gray py-12">
                     <File className="w-8 h-8 mx-auto mb-2 opacity-30" />
                     <p className="text-sm mb-3">No documents uploaded yet.</p>
                     <Button size="sm" onClick={() => { const input = document.getElementById('doc-upload') as HTMLInputElement; input?.click() }} className="bg-soft-gold text-white rounded-full">
@@ -276,7 +277,7 @@ export default function PortalDashboard() {
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-charcoal truncate">{doc.fileName}</p>
                           <div className="flex items-center gap-2 mt-0.5">
-                            {doc.fileSize && <span className="text-xs text-light-gray">{doc.fileSize}</span>}
+                            {doc.fileSize && <span className="text-xs text-medium-gray">{doc.fileSize}</span>}
                             {doc.category && (
                               <Badge variant="secondary" className="text-[10px] px-2 py-0 bg-beige text-dark-gold">
                                 {doc.category}
@@ -302,7 +303,7 @@ export default function PortalDashboard() {
             <div className="bg-white rounded-2xl border border-beige overflow-hidden">
               <div className="max-h-96 overflow-y-auto">
                 {data.appointments.length === 0 ? (
-                  <div className="text-center text-light-gray py-12">
+                  <div className="text-center text-medium-gray py-12">
                     <Calendar className="w-8 h-8 mx-auto mb-2 opacity-30" />
                     <p className="text-sm">No appointments scheduled.</p>
                   </div>
@@ -334,7 +335,7 @@ export default function PortalDashboard() {
                               size="sm"
                               variant="ghost"
                               onClick={() => handleCancelAppointment(apt.id)}
-                              className="text-light-gray hover:text-red-500 text-xs h-7"
+                              className="text-medium-gray hover:text-red-500 text-xs h-7"
                             >
                               Cancel
                             </Button>
@@ -353,7 +354,7 @@ export default function PortalDashboard() {
             <div className="bg-white rounded-2xl border border-beige overflow-hidden">
               <div className="max-h-96 overflow-y-auto">
                 {data.invoices.length === 0 ? (
-                  <div className="text-center text-light-gray py-12">
+                  <div className="text-center text-medium-gray py-12">
                     <DollarSign className="w-8 h-8 mx-auto mb-2 opacity-30" />
                     <p className="text-sm">No invoices yet.</p>
                   </div>

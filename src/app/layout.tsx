@@ -28,11 +28,12 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Mayer Law | Resourcefully Relentless Legal Representation",
+  title: "Mayer Law Florida | Resourcefully Relentless Legal Representation",
   description:
-    "Mayer Law, led by Attorney Nicole Mayer in Maitland, Florida. Specializing in Consumer Finance Law, Education Law & Civil Rights, Personal Injury, and General Litigation.",
+    "Mayer Law Florida, led by Attorney Nicole Mayer in Maitland, Florida. Specializing in Consumer Finance Law, Education Law & Civil Rights, Personal Injury, and General Litigation.",
   keywords: [
     "Mayer Law",
+    "Mayer Law Florida",
     "Nicole Mayer",
     "Maitland Florida lawyer",
     "consumer finance law",
@@ -42,23 +43,23 @@ export const metadata: Metadata = {
     "litigation",
     "Florida attorney",
   ],
-  authors: [{ name: "Mayer Law" }],
+  authors: [{ name: "Mayer Law Florida" }],
   icons: {
     icon: "/mayer-assets/favicon.png",
     apple: "/mayer-assets/favicon.png",
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Mayer Law | Resourcefully Relentless Legal Representation",
+    title: "Mayer Law Florida | Resourcefully Relentless Legal Representation",
     description:
       "Protecting your rights. Empowering your future. Attorney Nicole Mayer in Maitland, Florida.",
-    siteName: "Mayer Law",
+    siteName: "Mayer Law Florida",
     type: "website",
   },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Mayer Law",
+    title: "Mayer Law Florida",
   },
 };
 

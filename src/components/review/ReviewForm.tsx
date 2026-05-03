@@ -200,7 +200,7 @@ export default function ReviewForm() {
 
           <div>
             <Label htmlFor="rv-text" className="text-charcoal text-sm font-medium mb-1.5 block">
-              Your Review <span className="text-light-gray font-normal">(optional)</span>
+              Your Review <span className="text-medium-gray font-normal">(optional)</span>
             </Label>
             <Textarea
               id="rv-text"
@@ -214,7 +214,7 @@ export default function ReviewForm() {
 
           <div className="flex items-center justify-between p-4 rounded-xl bg-cream">
             <div>
-              <p className="text-sm font-medium text-charcoal">Would you recommend Mayer Law?</p>
+              <p className="text-sm font-medium text-charcoal">Would you recommend Mayer Law Florida?</p>
               <p className="text-xs text-medium-gray">Your recommendation helps others.</p>
             </div>
             <Switch

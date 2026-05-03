@@ -300,7 +300,7 @@ export default function TestimonialsSection() {
                   </div>
                 </div>
                 <h3 className="font-serif text-2xl font-bold text-charcoal mb-2">
-                  Mayer Law, P.A. on Google
+                  Mayer Law Florida on Google
                 </h3>
                 <p className="text-medium-gray text-sm">
                   Powered by Google &middot; Our clients speak for themselves. Read our reviews on Google.

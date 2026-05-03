@@ -142,6 +142,38 @@ export default function AdminDashboard() {
     } catch { toast.error('Failed.') }
   }
 
+  const deleteAppointment = async (id: string) => {
+    try {
+      const res = await fetch(`/api/appointments/${id}`, { method: 'DELETE' })
+      if (res.ok) { toast.success('Appointment deleted!'); fetchData() }
+    } catch { toast.error('Failed to delete.') }
+  }
+
+  const deleteReview = async (id: string) => {
+    try {
+      const res = await fetch(`/api/reviews/${id}`, { method: 'DELETE' })
+      if (res.ok) { toast.success('Review deleted!'); fetchData() }
+    } catch { toast.error('Failed to delete.') }
+  }
+
+  const deleteContact = async (id: string) => {
+    try {
+      const res = await fetch(`/api/contact/${id}`, { method: 'DELETE' })
+      if (res.ok) { toast.success('Message deleted!'); fetchData() }
+    } catch { toast.error('Failed to delete.') }
+  }
+
+  const markContactRead = async (id: string) => {
+    try {
+      const res = await fetch(`/api/contact/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ read: true }),
+      })
+      if (res.ok) { fetchData() }
+    } catch { toast.error('Failed.') }
+  }
+
   const applyThemeColors = () => {
     const root = document.documentElement
     root.style.setProperty('--color-soft-gold', settings.primaryColor)
@@ -169,6 +201,10 @@ export default function AdminDashboard() {
             <h1 className="font-serif text-lg font-semibold text-charcoal">Admin Panel</h1>
           </div>
           <div className="flex items-center gap-2">
+            <Button variant="ghost" onClick={() => setView('website')} className="text-medium-gray hover:text-charcoal text-sm">
+              <ArrowLeft className="w-4 h-4 mr-1" />
+              Home
+            </Button>
             <Button variant="ghost" onClick={() => { adminLogout(); setView('website') }} className="text-medium-gray hover:text-charcoal text-sm">
               Exit
             </Button>
@@ -247,7 +283,7 @@ export default function AdminDashboard() {
                     </Badge>
                   </div>
                 ))}
-                {data.appointments.length === 0 && <p className="text-sm text-light-gray text-center py-4">No appointments yet.</p>}
+                {data.appointments.length === 0 && <p className="text-sm text-medium-gray text-center py-4">No appointments yet.</p>}
               </div>
             </div>
           </TabsContent>
@@ -372,10 +408,10 @@ export default function AdminDashboard() {
                   const isEnabled = settings.sectionOrder.split(',').includes(section.id)
                   return (
                     <div key={section.id} className="flex items-center gap-4 p-4 rounded-xl border border-beige hover:border-soft-gold/30 transition-colors">
-                      <GripVertical className="w-5 h-5 text-light-gray" />
+                      <GripVertical className="w-5 h-5 text-medium-gray" />
                       <div className="flex-1">
                         <p className="text-sm font-medium text-charcoal">{section.label}</p>
-                        <p className="text-xs text-light-gray">ID: {section.id}</p>
+                        <p className="text-xs text-medium-gray">ID: {section.id}</p>
                       </div>
                       <Switch
                         checked={isEnabled}
@@ -440,13 +476,16 @@ export default function AdminDashboard() {
                                 <X className="w-3 h-3" />
                               </Button>
                             )}
+                            <Button size="sm" variant="ghost" onClick={() => deleteAppointment(apt.id)} className="text-xs h-7 text-red-500 hover:bg-soft-rose/20">
+                              <Trash2 className="w-3 h-3" />
+                            </Button>
                           </div>
                         </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                {data.appointments.length === 0 && <p className="text-sm text-light-gray text-center py-8">No appointments.</p>}
+                {data.appointments.length === 0 && <p className="text-sm text-medium-gray text-center py-8">No appointments.</p>}
               </div>
             </div>
           </TabsContent>
@@ -466,7 +505,7 @@ export default function AdminDashboard() {
                           {rev.featured && <Badge className="bg-soft-gold text-white text-[10px] px-2">Featured</Badge>}
                         </div>
                         {rev.text && <p className="text-sm text-medium-gray mb-2">&ldquo;{rev.text}&rdquo;</p>}
-                        {rev.service && <p className="text-xs text-light-gray">{rev.service}</p>}
+                        {rev.service && <p className="text-xs text-medium-gray">{rev.service}</p>}
 
                         {/* Response */}
                         {rev.response && (
@@ -482,6 +521,10 @@ export default function AdminDashboard() {
                       </div>
                     </div>
 
+                    {/* Delete review */}
+                    <Button size="sm" variant="ghost" onClick={() => deleteReview(rev.id)} className="text-xs h-7 text-red-500 hover:bg-soft-rose/20 shrink-0">
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
                     {/* Respond */}
                     <div className="mt-3 flex gap-2">
                       <Input
@@ -505,7 +548,7 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                 ))}
-                {data.reviews.length === 0 && <p className="text-sm text-light-gray text-center py-8">No reviews.</p>}
+                {data.reviews.length === 0 && <p className="text-sm text-medium-gray text-center py-8">No reviews.</p>}
               </div>
             </div>
           </TabsContent>
@@ -537,7 +580,7 @@ export default function AdminDashboard() {
                     ))}
                   </tbody>
                 </table>
-                {data.clients.length === 0 && <p className="text-sm text-light-gray text-center py-8">No clients.</p>}
+                {data.clients.length === 0 && <p className="text-sm text-medium-gray text-center py-8">No clients.</p>}
               </div>
             </div>
           </TabsContent>
@@ -569,7 +612,7 @@ export default function AdminDashboard() {
                     className="border-beige rounded-xl"
                     id="social-post-image"
                   />
-                  <p className="text-xs text-light-gray mt-1">Tip: Use images of your office, legal tips graphics, or team photos for better engagement.</p>
+                  <p className="text-xs text-medium-gray mt-1">Tip: Use images of your office, legal tips graphics, or team photos for better engagement.</p>
                 </div>
 
                 <div>
@@ -605,7 +648,7 @@ export default function AdminDashboard() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-light-gray mt-2">Click to copy your post to clipboard and open the platform to publish.</p>
+                  <p className="text-xs text-medium-gray mt-2">Click to copy your post to clipboard and open the platform to publish.</p>
                 </div>
 
                 {/* Post Templates */}
@@ -627,7 +670,7 @@ export default function AdminDashboard() {
                         className="text-left p-3 rounded-xl border border-beige hover:border-soft-gold/30 hover:bg-cream/50 transition-colors"
                       >
                         <p className="text-xs font-medium text-charcoal">{tpl.label}</p>
-                        <p className="text-[10px] text-light-gray mt-0.5 line-clamp-2">{tpl.template}</p>
+                        <p className="text-[10px] text-medium-gray mt-0.5 line-clamp-2">{tpl.template}</p>
                       </button>
                     ))}
                   </div>
@@ -733,12 +776,22 @@ export default function AdminDashboard() {
                         <p className="font-medium text-charcoal text-sm">{msg.name}</p>
                         <p className="text-xs text-medium-gray">{msg.email}</p>
                       </div>
-                      <p className="text-xs text-light-gray">{new Date(msg.createdAt).toLocaleDateString()}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="text-xs text-medium-gray">{new Date(msg.createdAt).toLocaleDateString()}</p>
+                        {!msg.read && (
+                          <Button size="sm" variant="ghost" onClick={() => markContactRead(msg.id)} className="text-xs h-7 text-dark-gold hover:bg-sage/20">
+                            <Check className="w-3 h-3" />
+                          </Button>
+                        )}
+                        <Button size="sm" variant="ghost" onClick={() => deleteContact(msg.id)} className="text-xs h-7 text-red-500 hover:bg-soft-rose/20">
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
                     </div>
                     <p className="text-sm text-charcoal mt-2">{msg.message}</p>
                   </div>
                 ))}
-                {data.contactSubmissions.length === 0 && <p className="text-sm text-light-gray text-center py-8">No messages.</p>}
+                {data.contactSubmissions.length === 0 && <p className="text-sm text-medium-gray text-center py-8">No messages.</p>}
               </div>
             </div>
           </TabsContent>

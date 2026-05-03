@@ -48,15 +48,14 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <Image
-                src="/mayer-assets/logo.png"
-                alt="Mayer Law"
-                width={40}
-                height={40}
-                className="w-10 h-10 brightness-0 invert"
+                src="/mayer-assets/logo-transparent.png"
+                alt="Mayer Law Florida"
+                width={472}
+                height={1024}
+                className="h-8 w-auto brightness-0 invert"
               />
               <div>
-                <p className="font-serif text-lg font-bold text-white">MAYER LAW</p>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-dusty-rose">P.A.</p>
+                <p className="font-serif text-lg font-bold text-white">MAYER LAW FLORIDA</p>
               </div>
             </div>
             <p className="text-sm text-white/50 leading-relaxed mb-4">
@@ -175,7 +174,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} Mayer Law, P.A. All rights reserved.
+            &copy; {new Date().getFullYear()} Mayer Law Florida. All rights reserved.
           </p>
           <button
             onClick={() => setView('admin')}

@@ -59,20 +59,12 @@ export default function Header() {
             className="flex items-center gap-3 shrink-0"
           >
             <Image
-              src="/mayer-assets/logo.png"
-              alt="Mayer Law Logo"
-              width={48}
-              height={48}
-              className="w-10 h-10 lg:w-12 lg:h-12"
+              src="/mayer-assets/logo-transparent.png"
+              alt="Mayer Law Florida Logo"
+              width={472}
+              height={1024}
+              className="h-10 lg:h-11 w-auto"
             />
-            <div className="flex flex-col">
-              <span className={`font-serif text-xl lg:text-2xl font-bold tracking-wide ${scrolled ? 'text-charcoal' : 'text-white'}`}>
-                MAYER LAW
-              </span>
-              <span className="text-[10px] lg:text-xs tracking-[0.2em] uppercase text-dusty-rose">
-                P.A.
-              </span>
-            </div>
           </a>
 
           {/* Desktop Navigation */}
@@ -155,8 +147,7 @@ export default function Header() {
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col h-full">
                   <div className="flex items-center gap-3 p-6 border-b border-sand">
-                    <Image src="/mayer-assets/logo.png" alt="Mayer Law" width={40} height={40} className="w-10 h-10" />
-                    <span className="font-serif text-xl font-bold text-charcoal">MAYER LAW</span>
+                    <Image src="/mayer-assets/logo-transparent.png" alt="Mayer Law Florida" width={472} height={1024} className="h-8 w-auto" />
                   </div>
 
                   <nav className="flex-1 py-4" aria-label="Mobile navigation">
