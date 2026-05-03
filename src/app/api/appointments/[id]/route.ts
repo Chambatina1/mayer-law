@@ -33,11 +33,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params
-    // In-memory: filter out the record
-    const results = await db.appointment.findMany({})
-    const filtered = results.filter(r => r.id !== id)
-    // Re-set store by removing and re-adding
-    try { await db.appointment.update({ where: { id }, data: { status: '_deleted' } }) } catch {}
+    await db.appointment.delete({ where: { id } })
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error deleting appointment:', error)
