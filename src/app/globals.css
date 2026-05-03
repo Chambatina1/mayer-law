@@ -42,46 +42,52 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-gold: #b1976b;
-  --color-gold-light: #c9b18a;
-  --color-gold-dark: #96794f;
-  --color-dark: #1a1a1a;
-  --color-dark-lighter: #2a2a2a;
+  --color-cream: #FDF8F0;
+  --color-warm-white: #FEFCF9;
+  --color-beige: #F5EDE0;
+  --color-soft-gold: #C9A96E;
+  --color-warm-gold: #B8976A;
+  --color-dark-gold: #8B7355;
+  --color-charcoal: #2D2D2D;
+  --color-medium-gray: #6B6B6B;
+  --color-light-gray: #A0A0A0;
+  --color-soft-rose: #E8D5D0;
+  --color-sage: #D4D9C8;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #1a1a1a;
-  --card: #ffffff;
-  --card-foreground: #1a1a1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a1a1a;
-  --primary: #1a1a1a;
-  --primary-foreground: #ffffff;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #1a1a1a;
-  --muted: #f5f5f5;
-  --muted-foreground: #6b6b6b;
-  --accent: #b1976b;
-  --accent-foreground: #ffffff;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: #e5e5e5;
-  --input: #e5e5e5;
-  --ring: #b1976b;
-  --chart-1: #b1976b;
-  --chart-2: #1a1a1a;
-  --chart-3: #96794f;
-  --chart-4: #c9b18a;
-  --chart-5: #f5f5f5;
-  --sidebar: #f5f5f5;
-  --sidebar-foreground: #1a1a1a;
-  --sidebar-primary: #1a1a1a;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f5f5f5;
-  --sidebar-accent-foreground: #1a1a1a;
-  --sidebar-border: #e5e5e5;
-  --sidebar-ring: #b1976b;
+  --background: #FDF8F0;
+  --foreground: #2D2D2D;
+  --card: #FFFFFF;
+  --card-foreground: #2D2D2D;
+  --popover: #FEFCF9;
+  --popover-foreground: #2D2D2D;
+  --primary: #C9A96E;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F5EDE0;
+  --secondary-foreground: #2D2D2D;
+  --muted: #F5EDE0;
+  --muted-foreground: #6B6B6B;
+  --accent: #E8D5D0;
+  --accent-foreground: #2D2D2D;
+  --destructive: #e74c3c;
+  --border: #E8D5D0;
+  --input: #E8D5D0;
+  --ring: #C9A96E;
+  --chart-1: #C9A96E;
+  --chart-2: #8B7355;
+  --chart-3: #E8D5D0;
+  --chart-4: #D4D9C8;
+  --chart-5: #F5EDE0;
+  --sidebar: #F5EDE0;
+  --sidebar-foreground: #2D2D2D;
+  --sidebar-primary: #C9A96E;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #FDF8F0;
+  --sidebar-accent-foreground: #2D2D2D;
+  --sidebar-border: #E8D5D0;
+  --sidebar-ring: #C9A96E;
 }
 
 @layer base {
@@ -98,39 +104,87 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f5f5f5;
+  background: #FDF8F0;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b1976b;
-  border-radius: 4px;
+  background: #C9A96E;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #96794f;
+  background: #8B7355;
 }
 
-/* Gold gradient text utility */
+/* Elegant text gradient */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #b1976b, #c9b18a);
+  background: linear-gradient(135deg, #C9A96E, #8B7355);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Gold border shimmer */
-.gold-border {
-  border-image: linear-gradient(135deg, #b1976b, #c9b18a) 1;
+/* Warm card hover effect */
+.warm-card-hover {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+.warm-card-hover:hover {
+  border-color: #C9A96E;
+  box-shadow: 0 8px 32px rgba(201, 169, 110, 0.15);
+  transform: translateY(-2px);
 }
 
-/* Hero overlay */
-.hero-overlay {
-  background: linear-gradient(135deg, rgba(26, 26, 26, 0.92) 0%, rgba(26, 26, 26, 0.75) 50%, rgba(177, 151, 107, 0.3) 100%);
+/* Subtle background patterns */
+.pattern-warm {
+  background-image: radial-gradient(circle at 1px 1px, rgba(201, 169, 110, 0.06) 1px, transparent 0);
+  background-size: 32px 32px;
 }
 
-/* Section pattern overlay */
-.section-pattern {
-  background-image: radial-gradient(circle at 1px 1px, rgba(177, 151, 107, 0.08) 1px, transparent 0);
-  background-size: 40px 40px;
+/* Gold accent line */
+.gold-accent-line {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #C9A96E, #8B7355);
+  border-radius: 2px;
+}
+
+/* Hero section overlay */
+.hero-warm-overlay {
+  background: linear-gradient(135deg, rgba(253, 248, 240, 0.85) 0%, rgba(254, 252, 249, 0.75) 50%, rgba(201, 169, 110, 0.15) 100%);
+}
+
+/* Booking step indicator */
+.step-active {
+  background: #C9A96E;
+  color: white;
+}
+.step-completed {
+  background: #D4D9C8;
+  color: #2D2D2D;
+}
+.step-inactive {
+  background: #F5EDE0;
+  color: #A0A0A0;
+}
+
+/* Animated fade in */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(201, 169, 110, 0.3);
 }

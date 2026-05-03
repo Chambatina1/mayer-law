@@ -4,21 +4,25 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, phone, practiceArea, date, time, notes } = body
+    const { name, email, phone, service, date, time, notes } = body
 
-    if (!name || !email || !phone || !practiceArea || !date || !time) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+    if (!name || !email || !phone || !service || !date || !time) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
+
+    // Create or find client
+    const client = await db.client.upsert({
+      where: { email },
+      update: {},
+      create: { name, email, phone },
+    })
 
     const appointment = await db.appointment.create({
       data: {
         name,
         email,
         phone,
-        practiceArea,
+        service,
         date,
         time,
         status: 'pending',
@@ -29,10 +33,7 @@ export async function POST(request: Request) {
     return NextResponse.json(appointment, { status: 201 })
   } catch (error) {
     console.error('Error creating appointment:', error)
-    return NextResponse.json(
-      { error: 'Failed to create appointment' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to create appointment' }, { status: 500 })
   }
 }
 
@@ -44,9 +45,6 @@ export async function GET() {
     return NextResponse.json(appointments)
   } catch (error) {
     console.error('Error fetching appointments:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch appointments' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to fetch appointments' }, { status: 500 })
   }
 }

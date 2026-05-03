@@ -8,42 +8,102 @@ datasource db {
 }
 
 model Appointment {
-  id            String   @id @default(cuid())
-  name          String
-  email         String
-  phone         String
-  practiceArea  String
-  date          String
-  time          String
-  status        String   @default("pending")
-  notes         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  phone        String
+  service      String
+  date         String
+  time         String
+  status       String   @default("pending")
+  notes        String?
+  reminderSent Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  client       Client?  @relation(fields: [email], references: [email])
 }
 
 model ContactSubmission {
-  id          String   @id @default(cuid())
-  name        String
-  email       String
-  phone       String?
-  caseType    String?
-  message     String
-  createdAt   DateTime @default(now())
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  clientName String
+  email      String
+  rating     Int
+  service    String?
+  text       String?
+  recommend  Boolean?
+  featured   Boolean  @default(false)
+  visible    Boolean  @default(true)
+  shareLink  String?  @unique
+  response   String?
+  createdAt  DateTime @default(now())
+}
+
+model Client {
+  id           String           @id @default(cuid())
+  name         String
+  email        String           @unique
+  phone        String?
+  createdAt    DateTime         @default(now())
+  appointments Appointment[]
+  documents    ClientDocument[]
+  messages     ClientMessage[]
+  invoices     Invoice[]
 }
 
 model ClientDocument {
-  id          String   @id @default(cuid())
-  clientEmail String
-  fileName    String
-  fileSize    String?
-  category    String?
-  uploadedAt  DateTime @default(now())
+  id         String   @id @default(cuid())
+  clientId   String
+  fileName   String
+  fileSize   String?
+  category   String?
+  fileData   String?
+  uploadedAt DateTime @default(now())
+  client     Client   @relation(fields: [clientId], references: [id])
 }
 
 model ClientMessage {
+  id        String   @id @default(cuid())
+  clientId  String
+  sender    String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  client    Client   @relation(fields: [clientId], references: [id])
+}
+
+model Invoice {
   id          String   @id @default(cuid())
-  clientEmail String
-  sender      String
-  message     String
+  clientId    String
+  amount      Float
+  status      String   @default("pending")
+  description String?
+  date        String
+  client      Client   @relation(fields: [clientId], references: [id])
   createdAt   DateTime @default(now())
+}
+
+model SiteSettings {
+  id             String   @id @default("main")
+  heroHeadline   String   @default("Resourcefully Relentless.")
+  heroSubtitle   String   @default("Protecting your rights with determination and care.")
+  aboutBio       String   @default("Founded by Nicole Mayer in 2020, Mayer Law brings over 20 years of legal experience to every case. We are committed to providing resourceful and relentless representation for individuals across Florida.")
+  phone          String   @default("(352) 494-3657")
+  email          String   @default("Nicole@MayerLawFlorida.com")
+  address        String   @default("Maitland, Florida")
+  primaryColor   String   @default("#C9A96E")
+  secondaryColor String   @default("#8B7355")
+  bgColor        String   @default("#FDF8F0")
+  sectionOrder   String   @default("hero,practice,about,stats,testimonials,cta,contact")
+  updatedAt      DateTime @updatedAt
 }

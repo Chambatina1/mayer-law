@@ -4,13 +4,10 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, phone, caseType, message } = body
+    const { name, email, phone, message } = body
 
     if (!name || !email || !message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
     const submission = await db.contactSubmission.create({
@@ -18,7 +15,6 @@ export async function POST(request: Request) {
         name,
         email,
         phone: phone || null,
-        caseType: caseType || null,
         message,
       },
     })
@@ -26,9 +22,18 @@ export async function POST(request: Request) {
     return NextResponse.json(submission, { status: 201 })
   } catch (error) {
     console.error('Error creating contact submission:', error)
-    return NextResponse.json(
-      { error: 'Failed to submit contact form' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to submit contact form' }, { status: 500 })
+  }
+}
+
+export async function GET() {
+  try {
+    const submissions = await db.contactSubmission.findMany({
+      orderBy: { createdAt: 'desc' },
+    })
+    return NextResponse.json(submissions)
+  } catch (error) {
+    console.error('Error fetching contact submissions:', error)
+    return NextResponse.json({ error: 'Failed to fetch submissions' }, { status: 500 })
   }
 }

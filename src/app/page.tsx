@@ -1,40 +1,59 @@
 'use client'
 
-import Header from '@/components/sections/Header'
-import HeroSection from '@/components/sections/HeroSection'
-import PracticeAreasSection from '@/components/sections/PracticeAreasSection'
-import AboutSection from '@/components/sections/AboutSection'
-import StatsSection from '@/components/sections/StatsSection'
-import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import NewsSection from '@/components/sections/NewsSection'
-import ContactSection from '@/components/sections/ContactSection'
-import Footer from '@/components/sections/Footer'
-import AppointmentModal from '@/components/modals/AppointmentModal'
-import ClientPortalModal from '@/components/modals/ClientPortalModal'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useAppStore } from '@/store/useAppStore'
+import Header from '@/components/website/Header'
+import HeroSection from '@/components/website/HeroSection'
+import PracticeAreasSection from '@/components/website/PracticeAreasSection'
+import AboutSection from '@/components/website/AboutSection'
+import StatsSection from '@/components/website/StatsSection'
+import TestimonialsSection from '@/components/website/TestimonialsSection'
+import CTABanner from '@/components/website/CTABanner'
+import ContactSection from '@/components/website/ContactSection'
+import Footer from '@/components/website/Footer'
+import BookingPage from '@/components/booking/BookingPage'
+import ReviewForm from '@/components/review/ReviewForm'
+import PortalLogin from '@/components/portal/PortalLogin'
+import PortalDashboard from '@/components/portal/PortalDashboard'
+import AdminLogin from '@/components/admin/AdminLogin'
+import AdminDashboard from '@/components/admin/AdminDashboard'
 
-export default function Home() {
+function WebsiteView() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Sticky Header */}
       <Header />
-
-      {/* Main Content */}
       <main className="flex-1">
         <HeroSection />
         <PracticeAreasSection />
         <AboutSection />
         <StatsSection />
         <TestimonialsSection />
-        <NewsSection />
+        <CTABanner />
         <ContactSection />
       </main>
-
-      {/* Sticky Footer */}
       <Footer />
-
-      {/* Modals */}
-      <AppointmentModal />
-      <ClientPortalModal />
     </div>
+  )
+}
+
+export default function Home() {
+  const { currentView, isLoggedIn } = useAppStore()
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={currentView}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {currentView === 'website' && <WebsiteView />}
+        {currentView === 'booking' && <BookingPage />}
+        {currentView === 'review' && <ReviewForm />}
+        {currentView === 'portal' && (isLoggedIn ? <PortalDashboard /> : <PortalLogin />)}
+        {currentView === 'admin' && <AdminDashboard />}
+      </motion.div>
+    </AnimatePresence>
   )
 }

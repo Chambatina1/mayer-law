@@ -1,0 +1,12 @@
+{
+  "name": "Mayer Law",
+  "short_name": "Mayer Law",
+  "description": "Resourcefully Relentless Legal Representation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8F0",
+  "theme_color": "#C9A96E",
+  "icons": [
+    { "src": "/mayer-assets/favicon.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

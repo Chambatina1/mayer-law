@@ -4,9 +4,9 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { clientEmail, sender, message } = body
+    const { clientEmail, fileName, fileSize, category, fileData } = body
 
-    if (!clientEmail || !sender || !message) {
+    if (!clientEmail || !fileName) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
@@ -15,18 +15,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 })
     }
 
-    const clientMessage = await db.clientMessage.create({
+    const document = await db.clientDocument.create({
       data: {
         clientId: client.id,
-        sender,
-        message,
+        fileName,
+        fileSize: fileSize || null,
+        category: category || null,
+        fileData: fileData || null,
       },
     })
 
-    return NextResponse.json(clientMessage, { status: 201 })
+    return NextResponse.json(document, { status: 201 })
   } catch (error) {
-    console.error('Error sending message:', error)
-    return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })
+    console.error('Error uploading document:', error)
+    return NextResponse.json({ error: 'Failed to upload document' }, { status: 500 })
   }
 }
 
@@ -44,14 +46,14 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 })
     }
 
-    const messages = await db.clientMessage.findMany({
+    const documents = await db.clientDocument.findMany({
       where: { clientId: client.id },
-      orderBy: { createdAt: 'asc' },
+      orderBy: { uploadedAt: 'desc' },
     })
 
-    return NextResponse.json(messages)
+    return NextResponse.json(documents)
   } catch (error) {
-    console.error('Error fetching messages:', error)
-    return NextResponse.json({ error: 'Failed to fetch messages' }, { status: 500 })
+    console.error('Error fetching documents:', error)
+    return NextResponse.json({ error: 'Failed to fetch documents' }, { status: 500 })
   }
 }
