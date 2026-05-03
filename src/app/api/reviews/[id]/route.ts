@@ -8,14 +8,13 @@ export async function PATCH(
   try {
     const { id } = await params
     const body = await request.json()
-    const { featured, visible, response } = body
+    const { featured, visible } = body
 
     const review = await db.review.update({
       where: { id },
       data: {
         ...(featured !== undefined && { featured }),
         ...(visible !== undefined && { visible }),
-        ...(response !== undefined && { response }),
       },
     })
 

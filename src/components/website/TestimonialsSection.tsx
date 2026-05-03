@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { Quote, ChevronLeft, ChevronRight, MessageSquarePlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import StarRating from '@/components/shared/StarRating'
 import SectionWrapper from '@/components/shared/SectionWrapper'
@@ -14,6 +14,7 @@ interface Review {
   rating: number
   service?: string | null
   text?: string | null
+  createdAt: string
 }
 
 export default function TestimonialsSection() {
@@ -23,116 +24,132 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     fetch('/api/reviews')
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) setReviews(data)
-      })
-      .catch(console.error)
+      .then((res) => res.json())
+      .then((data) => setReviews(data))
+      .catch(() => {})
   }, [])
 
   const next = useCallback(() => {
-    setCurrentIndex((i) => (i + 1) % reviews.length)
+    setCurrentIndex((prev) => (prev + 1) % reviews.length)
   }, [reviews.length])
 
   const prev = useCallback(() => {
-    setCurrentIndex((i) => (i - 1 + reviews.length) % reviews.length)
+    setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length)
   }, [reviews.length])
 
   useEffect(() => {
     if (reviews.length <= 1) return
-    const interval = setInterval(next, 6000)
-    return () => clearInterval(interval)
-  }, [next, reviews.length])
+    const timer = setInterval(next, 6000)
+    return () => clearInterval(timer)
+  }, [reviews.length, next])
 
   if (reviews.length === 0) return null
 
-  const review = reviews[currentIndex]
+  const currentReview = reviews[currentIndex]
 
   return (
-    <SectionWrapper id="testimonials" className="bg-warm-white">
-      <div className="text-center mb-12">
-        <div className="flex justify-center mb-4">
-          <div className="gold-accent-line" />
+    <SectionWrapper id="testimonials" className="bg-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div className="text-center mb-12">
+          <p className="text-sm font-medium tracking-[0.2em] uppercase text-dusty-rose mb-3">
+            Client Stories
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4">
+            What Our Clients Say
+          </h2>
+          <div className="accent-line mx-auto" />
         </div>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4">
-          Client Stories
-        </h2>
-        <p className="text-medium-gray text-lg max-w-xl mx-auto">
-          Real results from real people.
-        </p>
-      </div>
 
-      {/* Carousel */}
-      <div className="relative max-w-3xl mx-auto">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={review.id}
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -30 }}
-            transition={{ duration: 0.4 }}
-            className="bg-white rounded-2xl p-8 md:p-12 shadow-sm text-center"
-          >
-            <Quote className="w-8 h-8 text-soft-gold/30 mx-auto mb-6" />
-            <p className="text-charcoal text-lg md:text-xl leading-relaxed mb-6 font-light italic">
-              &ldquo;{review.text}&rdquo;
-            </p>
-            <StarRating rating={review.rating} size={18} className="justify-center mb-4" />
-            <p className="font-serif font-semibold text-charcoal">{review.clientName}</p>
-            {review.service && (
-              <p className="text-medium-gray text-sm mt-1">{review.service}</p>
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation */}
-        {reviews.length > 1 && (
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={prev}
-              className="rounded-full text-medium-gray hover:text-soft-gold hover:bg-beige/50"
-              aria-label="Previous review"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            <div className="flex gap-2">
-              {reviews.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentIndex(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === currentIndex ? 'bg-soft-gold w-6' : 'bg-light-gray'
-                  }`}
-                  aria-label={`Go to review ${i + 1}`}
-                />
-              ))}
+        {/* Carousel */}
+        <div className="max-w-3xl mx-auto">
+          <div className="relative bg-cream rounded-2xl border border-sand p-8 sm:p-10 min-h-[280px] flex flex-col justify-center">
+            {/* Quote icon */}
+            <div className="absolute top-6 left-8">
+              <Quote className="w-8 h-8 text-dusty-rose/30" />
             </div>
 
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentReview.id}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -30 }}
+                transition={{ duration: 0.3 }}
+                className="text-center"
+              >
+                {/* Stars */}
+                <div className="flex justify-center mb-5">
+                  <StarRating rating={currentReview.rating} size="lg" />
+                </div>
+
+                {/* Text */}
+                <p className="text-charcoal text-base sm:text-lg leading-relaxed mb-6 italic">
+                  &ldquo;{currentReview.text}&rdquo;
+                </p>
+
+                {/* Author */}
+                <div>
+                  <p className="font-bold text-charcoal">{currentReview.clientName}</p>
+                  {currentReview.service && (
+                    <p className="text-sm text-medium-gray">{currentReview.service}</p>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Navigation */}
+            {reviews.length > 1 && (
+              <div className="flex items-center justify-between mt-8">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={prev}
+                  className="text-medium-gray hover:text-dusty-rose hover:bg-blush rounded-full"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+
+                {/* Dots */}
+                <div className="flex items-center gap-1.5">
+                  {reviews.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentIndex(i)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        i === currentIndex
+                          ? 'bg-dusty-rose w-6'
+                          : 'bg-sand hover:bg-sage'
+                      }`}
+                      aria-label={`Go to review ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={next}
+                  className="text-medium-gray hover:text-dusty-rose hover:bg-blush rounded-full"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </Button>
+              </div>
+            )}
+          </div>
+
+          {/* Share button */}
+          <div className="text-center mt-8">
             <Button
-              variant="ghost"
-              size="icon"
-              onClick={next}
-              className="rounded-full text-medium-gray hover:text-soft-gold hover:bg-beige/50"
-              aria-label="Next review"
+              variant="outline"
+              onClick={() => setView('review')}
+              className="border-dusty-rose/30 text-dusty-rose hover:bg-dusty-rose hover:text-white rounded-full px-6"
             >
-              <ChevronRight className="w-5 h-5" />
+              <MessageSquarePlus className="w-4 h-4 mr-2" />
+              Share Your Experience
             </Button>
           </div>
-        )}
-      </div>
-
-      {/* Share CTA */}
-      <div className="text-center mt-10">
-        <Button
-          variant="ghost"
-          className="text-soft-gold hover:text-warm-gold font-medium"
-          onClick={() => setView('review')}
-        >
-          Share your experience →
-        </Button>
+        </div>
       </div>
     </SectionWrapper>
   )

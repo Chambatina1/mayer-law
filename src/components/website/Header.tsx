@@ -39,7 +39,7 @@ export default function Header() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-beige'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-sand'
           : 'bg-transparent'
       }`}
     >
@@ -59,10 +59,10 @@ export default function Header() {
               className="w-10 h-10 lg:w-12 lg:h-12"
             />
             <div className="flex flex-col">
-              <span className={`font-serif text-xl lg:text-2xl font-bold tracking-wide transition-colors ${scrolled ? 'text-charcoal' : 'text-charcoal'}`}>
+              <span className="font-serif text-xl lg:text-2xl font-bold tracking-wide text-charcoal">
                 MAYER LAW
               </span>
-              <span className="text-[10px] lg:text-xs tracking-[0.2em] uppercase text-soft-gold">
+              <span className="text-[10px] lg:text-xs tracking-[0.2em] uppercase text-dusty-rose">
                 P.A.
               </span>
             </div>
@@ -75,7 +75,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                className="text-sm font-medium tracking-wide text-charcoal/70 hover:text-soft-gold transition-colors"
+                className="text-sm font-medium tracking-wide text-charcoal/70 hover:text-dusty-rose transition-colors"
               >
                 {link.label}
               </a>
@@ -86,7 +86,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:3524943657"
-              className="flex items-center gap-2 text-sm font-medium text-medium-gray hover:text-soft-gold transition-colors mr-1"
+              className="flex items-center gap-2 text-sm font-medium text-medium-gray hover:text-dusty-rose transition-colors mr-1"
             >
               <Phone className="w-4 h-4" />
               (352) 494-3657
@@ -95,14 +95,14 @@ export default function Header() {
               variant="ghost"
               size="sm"
               onClick={() => setView('portal')}
-              className="text-medium-gray hover:text-soft-gold rounded-full px-3"
+              className="text-medium-gray hover:text-dusty-rose rounded-full px-3"
             >
               <UserCircle className="w-4 h-4 mr-1.5" />
               Portal
             </Button>
             <Button
               onClick={() => setView('booking')}
-              className="bg-soft-gold hover:bg-warm-gold text-white rounded-full px-5 shadow-sm hover:shadow-md transition-all"
+              className="bg-dusty-rose hover:bg-deep-rose text-white rounded-full px-5 shadow-sm hover:shadow-md transition-all"
               size="sm"
             >
               <Calendar className="w-4 h-4 mr-1.5" />
@@ -122,7 +122,7 @@ export default function Header() {
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <button
-                  className="p-2 rounded-lg text-charcoal hover:bg-beige/50 transition-colors"
+                  className="p-2 rounded-lg text-charcoal hover:bg-blush/50 transition-colors"
                   aria-label="Open menu"
                 >
                   <Menu className="w-6 h-6" />
@@ -131,7 +131,7 @@ export default function Header() {
               <SheetContent side="right" className="w-80 bg-white p-0">
                 <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
                 <div className="flex flex-col h-full">
-                  <div className="flex items-center gap-3 p-6 border-b border-beige">
+                  <div className="flex items-center gap-3 p-6 border-b border-sand">
                     <Image src="/mayer-assets/logo.png" alt="Mayer Law" width={40} height={40} className="w-10 h-10" />
                     <span className="font-serif text-xl font-bold text-charcoal">MAYER LAW</span>
                   </div>
@@ -142,20 +142,20 @@ export default function Header() {
                         key={link.href}
                         href={link.href}
                         onClick={(e) => { e.preventDefault(); handleNavClick(link.href) }}
-                        className="flex items-center px-6 py-4 text-charcoal/80 hover:text-soft-gold hover:bg-beige/30 transition-colors text-base font-medium"
+                        className="flex items-center px-6 py-4 text-charcoal/80 hover:text-dusty-rose hover:bg-blush/30 transition-colors text-base font-medium"
                       >
                         {link.label}
                       </a>
                     ))}
                   </nav>
 
-                  <div className="p-6 space-y-3 border-t border-beige">
-                    <Button variant="ghost" className="w-full text-medium-gray hover:text-soft-gold rounded-full" onClick={() => { setView('portal'); setMobileMenuOpen(false) }}>
+                  <div className="p-6 space-y-3 border-t border-sand">
+                    <Button variant="ghost" className="w-full text-medium-gray hover:text-dusty-rose rounded-full" onClick={() => { setView('portal'); setMobileMenuOpen(false) }}>
                       <UserCircle className="w-4 h-4 mr-2" />
                       Client Portal
                     </Button>
                     <Button
-                      className="w-full bg-soft-gold hover:bg-warm-gold text-white rounded-full shadow-lg"
+                      className="w-full bg-dusty-rose hover:bg-deep-rose text-white rounded-full shadow-lg"
                       onClick={() => { setView('booking'); setMobileMenuOpen(false) }}
                     >
                       <Calendar className="w-4 h-4 mr-2" />

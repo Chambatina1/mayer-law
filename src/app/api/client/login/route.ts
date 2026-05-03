@@ -14,7 +14,6 @@ export async function POST(request: Request) {
       where: { email },
     })
 
-    // If no client exists, create one automatically
     if (!client) {
       client = await db.client.create({
         data: {
@@ -25,8 +24,9 @@ export async function POST(request: Request) {
     }
 
     const appointments = await db.appointment.findMany({
-      where: { email },
+      where: { clientEmail: email },
       orderBy: { createdAt: 'desc' },
+      include: { documents: true },
     })
 
     const documents = await db.clientDocument.findMany({
@@ -50,6 +50,7 @@ export async function POST(request: Request) {
         id: client.id,
         name: client.name,
         email: client.email,
+        phone: client.phone,
       },
       appointments,
       documents,

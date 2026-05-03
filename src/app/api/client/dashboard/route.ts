@@ -17,8 +17,9 @@ export async function GET(request: Request) {
 
     const [appointments, documents, messages, invoices] = await Promise.all([
       db.appointment.findMany({
-        where: { email },
+        where: { clientEmail: email },
         orderBy: { createdAt: 'desc' },
+        include: { documents: true },
       }),
       db.clientDocument.findMany({
         where: { clientId: client.id },
@@ -30,16 +31,18 @@ export async function GET(request: Request) {
       }),
       db.invoice.findMany({
         where: { clientId: client.id },
-        orderBy: { createdAt: 'desc' },
-      }),
+        orderBy: { createdAt: 'desc' }),
     ])
 
+    const unreadMessages = messages.filter(m => !m.read && m.sender === 'admin').length
+
     return NextResponse.json({
-      client: { id: client.id, name: client.name, email: client.email },
+      client: { id: client.id, name: client.name, email: client.email, phone: client.phone },
       stats: {
         activeCases: appointments.filter(a => a.status === 'confirmed' || a.status === 'pending').length,
         upcomingAppointments: appointments.filter(a => a.status === 'confirmed').length,
         totalDocuments: documents.length,
+        unreadMessages,
       },
       appointments,
       documents,

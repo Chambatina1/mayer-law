@@ -5,7 +5,7 @@ interface AppState {
   currentView: 'website' | 'booking' | 'portal' | 'admin' | 'review'
   setView: (view: AppState['currentView']) => void
 
-  // Booking state
+  // Booking state — expanded for smart intake
   bookingStep: number
   selectedService: string
   selectedDate: string | undefined
@@ -13,12 +13,29 @@ interface AppState {
   bookingName: string
   bookingEmail: string
   bookingPhone: string
-  bookingNotes: string
+  contactPref: string
+  streetAddress: string
+  city: string
+  state: string
+  zip: string
+  county: string
+  caseDescription: string
+  issueDate: string
+  prevAttorney: boolean
+  hasCourtDeadline: boolean
+  courtDeadline: string
+  referralSource: string
+  urgency: number
+  consentGiven: boolean
+  privacyConsent: boolean
+  uploadedFiles: { name: string; size: number; type: string; data: string }[]
+  confirmChecked: boolean
+
   setBookingStep: (step: number) => void
   setBookingService: (service: string) => void
   setBookingDate: (date: string | undefined) => void
   setBookingTime: (time: string) => void
-  setBookingDetails: (details: { name?: string; email?: string; phone?: string; notes?: string }) => void
+  setBookingField: (field: string, value: unknown) => void
   resetBooking: () => void
 
   // Client portal
@@ -48,7 +65,7 @@ interface AppState {
   setActiveSection: (section: string) => void
 }
 
-const initialState = {
+const bookingInitialState = {
   bookingStep: 1,
   selectedService: '',
   selectedDate: undefined,
@@ -56,7 +73,23 @@ const initialState = {
   bookingName: '',
   bookingEmail: '',
   bookingPhone: '',
-  bookingNotes: '',
+  contactPref: 'email',
+  streetAddress: '',
+  city: '',
+  state: 'FL',
+  zip: '',
+  county: '',
+  caseDescription: '',
+  issueDate: '',
+  prevAttorney: false,
+  hasCourtDeadline: false,
+  courtDeadline: '',
+  referralSource: '',
+  urgency: 3,
+  consentGiven: false,
+  privacyConsent: false,
+  uploadedFiles: [] as { name: string; size: number; type: string; data: string }[],
+  confirmChecked: false,
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -65,19 +98,13 @@ export const useAppStore = create<AppState>((set) => ({
   setView: (view) => set({ currentView: view }),
 
   // Booking state
-  ...initialState,
+  ...bookingInitialState,
   setBookingStep: (step) => set({ bookingStep: step }),
   setBookingService: (service) => set({ selectedService: service }),
   setBookingDate: (date) => set({ selectedDate: date }),
   setBookingTime: (time) => set({ selectedTime: time }),
-  setBookingDetails: (details) =>
-    set((state) => ({
-      bookingName: details.name ?? state.bookingName,
-      bookingEmail: details.email ?? state.bookingEmail,
-      bookingPhone: details.phone ?? state.bookingPhone,
-      bookingNotes: details.notes ?? state.bookingNotes,
-    })),
-  resetBooking: () => set(initialState),
+  setBookingField: (field, value) => set({ [field]: value }),
+  resetBooking: () => set(bookingInitialState),
 
   // Client portal
   clientEmail: null,

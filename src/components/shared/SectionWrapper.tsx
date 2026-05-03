@@ -10,7 +10,12 @@ interface SectionWrapperProps {
   noPadding?: boolean
 }
 
-export default function SectionWrapper({ children, id, className = '', noPadding = false }: SectionWrapperProps) {
+export default function SectionWrapper({
+  children,
+  id,
+  className,
+  noPadding = false,
+}: SectionWrapperProps) {
   return (
     <motion.section
       id={id}
@@ -18,11 +23,9 @@ export default function SectionWrapper({ children, id, className = '', noPadding
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={cn(!noPadding && 'py-16 md:py-24 px-4 sm:px-6 lg:px-8', className)}
+      className={cn(noPadding ? '' : 'py-16 sm:py-20 lg:py-24', className)}
     >
-      <div className="max-w-6xl mx-auto">
-        {children}
-      </div>
+      {children}
     </motion.section>
   )
 }

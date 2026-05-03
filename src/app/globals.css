@@ -42,52 +42,55 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-cream: #FDF8F0;
-  --color-warm-white: #FEFCF9;
-  --color-beige: #F5EDE0;
-  --color-soft-gold: #C9A96E;
-  --color-warm-gold: #B8976A;
-  --color-dark-gold: #8B7355;
-  --color-charcoal: #2D2D2D;
-  --color-medium-gray: #6B6B6B;
-  --color-light-gray: #A0A0A0;
-  --color-soft-rose: #E8D5D0;
-  --color-sage: #D4D9C8;
+  /* Blush & Charcoal palette */
+  --color-cream: #FBF7F4;
+  --color-warm-white: #FDF9F7;
+  --color-blush: #F0E6E0;
+  --color-dusty-rose: #C17B6E;
+  --color-deep-rose: #A8645A;
+  --color-dark-rose: #8B5248;
+  --color-charcoal: #2C2525;
+  --color-warm-charcoal: #3D3535;
+  --color-medium-gray: #8A7E7A;
+  --color-light-gray: #B5ADA8;
+  --color-sand: #E0D5CF;
+  --color-sage: #C8C0B8;
+  --color-white: #FFFFFF;
 }
 
 :root {
   --radius: 0.625rem;
-  --background: #FDF8F0;
-  --foreground: #2D2D2D;
+  --background: #FBF7F4;
+  --foreground: #2C2525;
   --card: #FFFFFF;
-  --card-foreground: #2D2D2D;
-  --popover: #FEFCF9;
-  --popover-foreground: #2D2D2D;
-  --primary: #C9A96E;
+  --card-foreground: #2C2525;
+  --popover: #FDF9F7;
+  --popover-foreground: #2C2525;
+  --primary: #C17B6E;
   --primary-foreground: #FFFFFF;
-  --secondary: #F5EDE0;
-  --secondary-foreground: #2D2D2D;
-  --muted: #F5EDE0;
-  --muted-foreground: #6B6B6B;
-  --accent: #E8D5D0;
-  --accent-foreground: #2D2D2D;
-  --destructive: #e74c3c;
-  --border: #E8D5D0;
-  --input: #E8D5D0;
-  --ring: #C9A96E;
-  --chart-1: #C9A96E;
-  --chart-2: #8B7355;
-  --chart-3: #E8D5D0;
-  --chart-4: #D4D9C8;
-  --chart-5: #F5EDE0;
-  --sidebar: #F5EDE0;
-  --sidebar-foreground: #2D2D2D;
-  --sidebar-primary: #C9A96E;
+  --secondary: #F0E6E0;
+  --secondary-foreground: #2C2525;
+  --muted: #F0E6E0;
+  --muted-foreground: #8A7E7A;
+  --accent: #E0D5CF;
+  --accent-foreground: #2C2525;
+  --destructive: #C0392B;
+  --border: #E0D5CF;
+  --input: #E0D5CF;
+  --ring: #C17B6E;
+  --chart-1: #C17B6E;
+  --chart-2: #A8645A;
+  --chart-3: #8B5248;
+  --chart-4: #C8C0B8;
+  --chart-5: #F0E6E0;
+  --sidebar: #F0E6E0;
+  --sidebar-foreground: #2C2525;
+  --sidebar-primary: #C17B6E;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #FDF8F0;
-  --sidebar-accent-foreground: #2D2D2D;
-  --sidebar-border: #E8D5D0;
-  --sidebar-ring: #C9A96E;
+  --sidebar-accent: #FBF7F4;
+  --sidebar-accent-foreground: #2C2525;
+  --sidebar-border: #E0D5CF;
+  --sidebar-ring: #C17B6E;
 }
 
 @layer base {
@@ -107,19 +110,19 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FDF8F0;
+  background: #FBF7F4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #C9A96E;
+  background: #C17B6E;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8B7355;
+  background: #A8645A;
 }
 
-/* Elegant text gradient */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #C9A96E, #8B7355);
+/* Rose gradient text */
+.text-rose-gradient {
+  background: linear-gradient(135deg, #C17B6E, #8B5248);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -131,60 +134,118 @@
   border: 2px solid transparent;
 }
 .warm-card-hover:hover {
-  border-color: #C9A96E;
-  box-shadow: 0 8px 32px rgba(201, 169, 110, 0.15);
+  border-color: #C17B6E;
+  box-shadow: 0 8px 32px rgba(193, 123, 110, 0.15);
   transform: translateY(-2px);
 }
 
 /* Subtle background patterns */
 .pattern-warm {
-  background-image: radial-gradient(circle at 1px 1px, rgba(201, 169, 110, 0.06) 1px, transparent 0);
+  background-image: radial-gradient(circle at 1px 1px, rgba(193, 123, 110, 0.06) 1px, transparent 0);
   background-size: 32px 32px;
 }
 
-/* Gold accent line */
-.gold-accent-line {
+/* Accent line */
+.accent-line {
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #C9A96E, #8B7355);
+  background: linear-gradient(90deg, #C17B6E, #8B5248);
   border-radius: 2px;
 }
 
-/* Hero section overlay */
+/* Hero overlay */
 .hero-warm-overlay {
-  background: linear-gradient(135deg, rgba(253, 248, 240, 0.85) 0%, rgba(254, 252, 249, 0.75) 50%, rgba(201, 169, 110, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(251, 247, 244, 0.88) 0%, rgba(253, 249, 247, 0.78) 50%, rgba(193, 123, 110, 0.12) 100%);
 }
 
-/* Booking step indicator */
+/* Step indicators */
 .step-active {
-  background: #C9A96E;
+  background: #C17B6E;
   color: white;
 }
 .step-completed {
-  background: #D4D9C8;
-  color: #2D2D2D;
+  background: #C8C0B8;
+  color: #2C2525;
 }
 .step-inactive {
-  background: #F5EDE0;
-  color: #A0A0A0;
+  background: #F0E6E0;
+  color: #B5ADA8;
 }
 
 /* Animated fade in */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out;
 }
 
+/* Pulse checkmark */
+@keyframes pulseCheck {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pulse-check {
+  animation: pulseCheck 0.6s ease-out;
+}
+
 /* Selection color */
 ::selection {
-  background: rgba(201, 169, 110, 0.3);
+  background: rgba(193, 123, 110, 0.3);
+}
+
+/* Toggle button group styles */
+.toggle-btn {
+  transition: all 0.2s ease;
+}
+.toggle-btn.active {
+  background-color: #C17B6E;
+  color: white;
+  border-color: #C17B6E;
+}
+
+/* Urgency slider */
+.urgency-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #C17B6E;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.urgency-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #C17B6E;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Custom scrollbar for content areas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #E0D5CF;
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #C8C0B8;
+}
+
+/* Chat bubble styles */
+.chat-bubble-client {
+  background: #F0E6E0;
+  border-radius: 18px 18px 4px 18px;
+}
+.chat-bubble-admin {
+  background: #C17B6E;
+  color: white;
+  border-radius: 18px 18px 18px 4px;
 }

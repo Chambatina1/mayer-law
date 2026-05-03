@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { cn } from '@/lib/utils'
 
 interface AnimatedCounterProps {
   end: number
@@ -15,23 +16,22 @@ export default function AnimatedCounter({
   duration = 2000,
   suffix = '',
   prefix = '',
-  className = '',
+  className,
 }: AnimatedCounterProps) {
   const [count, setCount] = useState(0)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLSpanElement>(null)
   const hasAnimated = useRef(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated.current) {
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated.current) {
           hasAnimated.current = true
           const startTime = performance.now()
 
           const animate = (currentTime: number) => {
             const elapsed = currentTime - startTime
             const progress = Math.min(elapsed / duration, 1)
-            // Ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3)
             setCount(Math.floor(eased * end))
 
@@ -53,8 +53,8 @@ export default function AnimatedCounter({
   }, [end, duration])
 
   return (
-    <div ref={ref} className={className}>
+    <span ref={ref} className={cn('tabular-nums', className)}>
       {prefix}{count.toLocaleString()}{suffix}
-    </div>
+    </span>
   )
 }

@@ -14,8 +14,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Rating must be between 1 and 5' }, { status: 400 })
     }
 
-    const shareLink = `review-${Date.now()}-${Math.random().toString(36).substring(2, 8)}`
-
     const review = await db.review.create({
       data: {
         clientName,
@@ -24,7 +22,6 @@ export async function POST(request: Request) {
         service: service || null,
         text: text || null,
         recommend: recommend ?? null,
-        shareLink,
         visible: true,
       },
     })

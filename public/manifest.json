@@ -4,8 +4,8 @@
   "description": "Resourcefully Relentless Legal Representation",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FDF8F0",
-  "theme_color": "#C9A96E",
+  "background_color": "#FBF7F4",
+  "theme_color": "#C17B6E",
   "icons": [
     { "src": "/mayer-assets/favicon.png", "sizes": "192x192", "type": "image/png" }
   ]

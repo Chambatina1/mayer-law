@@ -21,14 +21,14 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#C9A96E",
+  themeColor: "#C17B6E",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata: Metadata = {
-  title: "Mayer Law | Resourcefully Relentless Representation",
+  title: "Mayer Law | Resourcefully Relentless Legal Representation",
   description:
     "Mayer Law, led by Attorney Nicole Mayer in Maitland, Florida. Specializing in Consumer Finance Law, Education Law & Civil Rights, Personal Injury, and General Litigation.",
   keywords: [
@@ -49,9 +49,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Mayer Law | Resourcefully Relentless Representation",
+    title: "Mayer Law | Resourcefully Relentless Legal Representation",
     description:
-      "Through individual action, or class action, WE TAKE ACTION. Attorney Nicole Mayer in Maitland, Florida.",
+      "Protecting your rights. Empowering your future. Attorney Nicole Mayer in Maitland, Florida.",
     siteName: "Mayer Law",
     type: "website",
   },
@@ -81,9 +81,9 @@ export default function RootLayout({
           position="top-right"
           toastOptions={{
             style: {
-              background: "#FEFCF9",
-              border: "1px solid #F5EDE0",
-              color: "#2D2D2D",
+              background: "#FDF9F7",
+              border: "1px solid #E0D5CF",
+              color: "#2C2525",
               fontFamily: "var(--font-inter)",
             },
           }}

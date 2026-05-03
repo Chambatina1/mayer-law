@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 interface StarRatingProps {
   rating: number
   maxRating?: number
-  size?: number
+  size?: 'sm' | 'md' | 'lg'
   interactive?: boolean
   onRate?: (rating: number) => void
   className?: string
@@ -15,38 +15,40 @@ interface StarRatingProps {
 export default function StarRating({
   rating,
   maxRating = 5,
-  size = 18,
+  size = 'md',
   interactive = false,
   onRate,
   className,
 }: StarRatingProps) {
-  return (
-    <div className={cn('flex gap-0.5', className)}>
-      {Array.from({ length: maxRating }, (_, i) => {
-        const starValue = i + 1
-        const isFilled = starValue <= rating
+  const sizes = {
+    sm: 'w-3.5 h-3.5',
+    md: 'w-5 h-5',
+    lg: 'w-6 h-6',
+  }
 
+  return (
+    <div className={cn('flex items-center gap-0.5', className)} role={interactive ? 'radiogroup' : 'img'} aria-label={`${rating} out of ${maxRating} stars`}>
+      {Array.from({ length: maxRating }, (_, i) => {
+        const filled = i < rating
         return (
           <button
             key={i}
             type="button"
             disabled={!interactive}
-            onClick={() => interactive && onRate?.(starValue)}
+            onClick={() => interactive && onRate?.(i + 1)}
             className={cn(
-              'transition-transform',
-              interactive && 'cursor-pointer hover:scale-110 active:scale-95'
+              'transition-colors duration-150',
+              interactive ? 'cursor-pointer hover:scale-110' : 'cursor-default'
             )}
-            aria-label={`${starValue} star${starValue > 1 ? 's' : ''}`}
+            aria-label={filled ? `${i + 1} star filled` : `${i + 1} star empty`}
           >
             <Star
-              size={size}
               className={cn(
+                sizes[size],
                 'transition-colors',
-                isFilled
-                  ? 'fill-[#C9A96E] text-[#C9A96E]'
-                  : interactive
-                  ? 'text-[#A0A0A0] hover:text-[#C9A96E]'
-                  : 'text-[#A0A0A0]'
+                filled
+                  ? 'fill-dusty-rose text-dusty-rose'
+                  : 'fill-transparent text-sand'
               )}
             />
           </button>

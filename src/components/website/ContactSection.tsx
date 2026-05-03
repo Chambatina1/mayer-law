@@ -2,179 +2,227 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Phone, Mail, MapPin } from 'lucide-react'
+import { Phone, Mail, MapPin, Send, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
-import SectionWrapper from '@/components/shared/SectionWrapper'
 import { toast } from 'sonner'
+import SectionWrapper from '@/components/shared/SectionWrapper'
+
+const contactInfo = [
+  {
+    icon: Phone,
+    label: 'Call Us',
+    value: '(352) 494-3657',
+    href: 'tel:3524943657',
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'Nicole@MayerLawFlorida.com',
+    href: 'mailto:Nicole@MayerLawFlorida.com',
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Maitland, Florida',
+    href: null,
+  },
+]
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' })
-  const [sending, setSending] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error('Please fill in all required fields.')
-      return
-    }
-    setSending(true)
+    setSubmitting(true)
+
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       })
+
       if (res.ok) {
-        toast.success('Thank you! We\'ll be in touch soon.')
+        setSubmitted(true)
+        toast.success('Message sent! We will be in touch soon.')
         setFormData({ name: '', email: '', phone: '', message: '' })
-      } else {
-        toast.error('Something went wrong. Please try again.')
+        setTimeout(() => setSubmitted(false), 3000)
       }
     } catch {
       toast.error('Failed to send message. Please try again.')
+    } finally {
+      setSubmitting(false)
     }
-    setSending(false)
   }
 
   return (
     <SectionWrapper id="contact" className="bg-cream">
-      <div className="text-center mb-12">
-        <div className="flex justify-center mb-4">
-          <div className="gold-accent-line" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section header */}
+        <div className="text-center mb-12">
+          <p className="text-sm font-medium tracking-[0.2em] uppercase text-dusty-rose mb-3">
+            Get In Touch
+          </p>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4">
+            Contact Us
+          </h2>
+          <div className="accent-line mx-auto" />
         </div>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4">
-          Get in Touch
-        </h2>
-        <p className="text-medium-gray text-lg max-w-xl mx-auto">
-          We&apos;re here to listen and help.
-        </p>
-      </div>
 
-      <div className="grid lg:grid-cols-5 gap-12">
-        {/* Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="lg:col-span-3 space-y-5"
-        >
-          <div className="grid sm:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name" className="text-charcoal text-sm font-medium mb-1.5 block">Name *</Label>
-              <Input
-                id="name"
-                placeholder="Your name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="bg-white border-beige focus:border-soft-gold rounded-xl"
-              />
-            </div>
-            <div>
-              <Label htmlFor="email" className="text-charcoal text-sm font-medium mb-1.5 block">Email *</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="your@email.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="bg-white border-beige focus:border-soft-gold rounded-xl"
-              />
-            </div>
-          </div>
-          <div>
-            <Label htmlFor="phone" className="text-charcoal text-sm font-medium mb-1.5 block">Phone</Label>
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="(555) 000-0000"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="bg-white border-beige focus:border-soft-gold rounded-xl"
-            />
-          </div>
-          <div>
-            <Label htmlFor="message" className="text-charcoal text-sm font-medium mb-1.5 block">Message *</Label>
-            <Textarea
-              id="message"
-              placeholder="Briefly describe your situation..."
-              rows={5}
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="bg-white border-beige focus:border-soft-gold rounded-xl resize-none"
-            />
-          </div>
-          <Button
-            type="submit"
-            disabled={sending}
-            className="bg-soft-gold hover:bg-warm-gold text-white rounded-full px-8 py-6 shadow-sm hover:shadow-md transition-all"
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-12">
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 space-y-6"
           >
-            {sending ? (
-              <span className="flex items-center gap-2">Sending...</span>
-            ) : (
-              <>
-                <Send className="w-4 h-4 mr-2" />
-                Send Message
-              </>
-            )}
-          </Button>
-        </motion.form>
-
-        {/* Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="lg:col-span-2 space-y-8"
-        >
-          <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-xl bg-beige/80 flex items-center justify-center shrink-0">
-                <Phone className="w-5 h-5 text-soft-gold" />
+            {contactInfo.map((item) => (
+              <div key={item.label} className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-blush flex items-center justify-center shrink-0">
+                  <item.icon className="w-5 h-5 text-dusty-rose" />
+                </div>
+                <div>
+                  <p className="text-xs font-medium uppercase tracking-wider text-medium-gray mb-1">
+                    {item.label}
+                  </p>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="text-sm font-semibold text-charcoal hover:text-dusty-rose transition-colors"
+                    >
+                      {item.value}
+                    </a>
+                  ) : (
+                    <p className="text-sm font-semibold text-charcoal">{item.value}</p>
+                  )}
+                </div>
               </div>
-              <div>
-                <p className="font-medium text-charcoal">Phone</p>
-                <a href="tel:3524943657" className="text-medium-gray hover:text-soft-gold transition-colors">
-                  (352) 494-3657
-                </a>
+            ))}
+
+            {/* Map placeholder */}
+            <div className="rounded-xl border border-sand overflow-hidden h-48 bg-blush mt-6 flex items-center justify-center">
+              <div className="text-center">
+                <MapPin className="w-8 h-8 text-dusty-rose/40 mx-auto mb-2" />
+                <p className="text-sm text-medium-gray">Maitland, Florida</p>
               </div>
             </div>
+          </motion.div>
 
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-xl bg-beige/80 flex items-center justify-center shrink-0">
-                <Mail className="w-5 h-5 text-soft-gold" />
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="lg:col-span-3"
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="bg-white rounded-2xl border border-sand p-6 sm:p-8 space-y-5"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-sm font-medium text-charcoal">
+                    Full Name *
+                  </Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your name"
+                    className="border-sand focus:border-dusty-rose focus:ring-dusty-rose bg-cream/50"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium text-charcoal">
+                    Email *
+                  </Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="your@email.com"
+                    className="border-sand focus:border-dusty-rose focus:ring-dusty-rose bg-cream/50"
+                  />
+                </div>
               </div>
-              <div>
-                <p className="font-medium text-charcoal">Email</p>
-                <a href="mailto:Nicole@MayerLawFlorida.com" className="text-medium-gray hover:text-soft-gold transition-colors break-all">
-                  Nicole@MayerLawFlorida.com
-                </a>
-              </div>
-            </div>
 
-            <div className="flex gap-4">
-              <div className="w-12 h-12 rounded-xl bg-beige/80 flex items-center justify-center shrink-0">
-                <MapPin className="w-5 h-5 text-soft-gold" />
+              <div className="space-y-2">
+                <Label htmlFor="phone" className="text-sm font-medium text-charcoal">
+                  Phone
+                </Label>
+                <Input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="(352) 000-0000"
+                  className="border-sand focus:border-dusty-rose focus:ring-dusty-rose bg-cream/50"
+                />
               </div>
-              <div>
-                <p className="font-medium text-charcoal">Office</p>
-                <p className="text-medium-gray">Maitland, Florida</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Map placeholder */}
-          <div className="rounded-2xl overflow-hidden bg-beige/50 h-48 flex items-center justify-center border border-beige">
-            <div className="text-center text-medium-gray">
-              <MapPin className="w-8 h-8 mx-auto mb-2 text-soft-gold/50" />
-              <p className="text-sm">Maitland, Florida</p>
-            </div>
-          </div>
-        </motion.div>
+              <div className="space-y-2">
+                <Label htmlFor="message" className="text-sm font-medium text-charcoal">
+                  Message *
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="How can we help you?"
+                  className="border-sand focus:border-dusty-rose focus:ring-dusty-rose bg-cream/50 resize-none"
+                />
+              </div>
+
+              <Button
+                type="submit"
+                disabled={submitting || submitted}
+                className={`w-full rounded-full py-6 text-base font-semibold transition-all ${
+                  submitted
+                    ? 'bg-sage text-charcoal'
+                    : 'bg-dusty-rose hover:bg-deep-rose text-white'
+                }`}
+              >
+                {submitted ? (
+                  <>
+                    <CheckCircle className="w-5 h-5 mr-2" />
+                    Message Sent!
+                  </>
+                ) : submitting ? (
+                  'Sending...'
+                ) : (
+                  <>
+                    <Send className="w-5 h-5 mr-2" />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </SectionWrapper>
   )
