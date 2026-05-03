@@ -11,26 +11,30 @@ const practiceAreas = [
   {
     title: 'Consumer Finance Law',
     tagline: 'Your rights. Our fight.',
-    description: 'Protecting consumers from unfair practices, debt collection abuses, and financial exploitation.',
-    icon: '/mayer-assets/icon-consumer.png',
+    description: 'Protecting consumers from unfair practices, debt collection abuses, and financial exploitation. We hold corporations accountable.',
+    image: '/mayer-assets/practice-consumer.png',
+    details: ['Debt Collection Defense', 'Credit Reporting Errors', 'Consumer Fraud', 'Contract Disputes'],
   },
   {
     title: 'Education Law & Civil Rights',
     tagline: 'Equal treatment. No exceptions.',
-    description: 'Defending students and professionals in education disputes, licensing, and civil rights matters.',
-    icon: '/mayer-assets/icon-education.png',
+    description: 'Defending students and professionals in education disputes, licensing matters, and civil rights violations across Florida.',
+    image: '/mayer-assets/practice-education.png',
+    details: ['IEP & 504 Advocacy', 'Employment Disputes', 'Discrimination Claims', 'Licensing Defense'],
   },
   {
     title: 'Personal Injury',
     tagline: 'You deserve better.',
-    description: 'Fighting for full compensation when negligence causes harm to you or your loved ones.',
-    icon: '/mayer-assets/icon-injury.png',
+    description: 'Fighting for full compensation when negligence causes harm. Medical bills, lost wages, and pain — we build your strongest case.',
+    image: '/mayer-assets/practice-injury.png',
+    details: ['Auto Accidents', 'Slip & Fall', 'Medical Negligence', 'Wrongful Death'],
   },
   {
     title: 'General Litigation & Consulting',
     tagline: 'Practical solutions. Skilled advocacy.',
-    description: 'Strategic legal counsel and courtroom representation across a broad range of civil matters.',
-    icon: '/mayer-assets/gavel-abstract.png',
+    description: 'Strategic legal counsel and courtroom representation across a broad range of civil matters. Creative strategies, proven results.',
+    image: '/mayer-assets/practice-litigation.png',
+    details: ['Civil Litigation', 'Business Disputes', 'Contract Review', 'Legal Strategy'],
   },
 ]
 
@@ -38,15 +42,9 @@ export default function PracticeAreasSection() {
   const { setView } = useAppStore()
 
   const handleLearnMore = (areaTitle: string) => {
-    // Scroll to contact section and pre-fill the service interest
-    const contactEl = document.querySelector('#contact')
-    if (contactEl) {
-      contactEl.scrollIntoView({ behavior: 'smooth' })
-    }
-    // Also open booking with the area pre-selected
     setTimeout(() => {
       setView('booking')
-    }, 600)
+    }, 300)
   }
 
   return (
@@ -64,7 +62,7 @@ export default function PracticeAreasSection() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {practiceAreas.map((area, i) => (
             <motion.div
               key={area.title}
@@ -73,37 +71,56 @@ export default function PracticeAreasSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="group bg-white border border-sand rounded-2xl p-6 h-full transition-all duration-300 hover:border-dusty-rose hover:shadow-lg hover:shadow-dusty-rose/10 hover:-translate-y-1 cursor-pointer" onClick={() => handleLearnMore(area.title)}>
-                {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-blush flex items-center justify-center mb-5 transition-colors group-hover:bg-dusty-rose/10">
+              <div
+                className="group bg-white border border-sand rounded-2xl overflow-hidden h-full transition-all duration-300 hover:border-dusty-rose hover:shadow-lg hover:shadow-dusty-rose/10 hover:-translate-y-1 cursor-pointer"
+                onClick={() => handleLearnMore(area.title)}
+              >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
                   <Image
-                    src={area.icon}
+                    src={area.image}
                     alt={area.title}
-                    width={32}
-                    height={32}
-                    className="w-8 h-8"
+                    width={600}
+                    height={300}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent" />
+                  <div className="absolute bottom-4 left-5 right-5">
+                    <h3 className="font-serif text-xl font-bold text-white drop-shadow-sm">
+                      {area.title}
+                    </h3>
+                    <p className="text-white/80 text-sm font-medium">
+                      {area.tagline}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="font-serif text-lg font-bold text-charcoal mb-2">
-                  {area.title}
-                </h3>
-                <p className="text-dusty-rose font-medium text-sm mb-3">
-                  {area.tagline}
-                </p>
-                <p className="text-medium-gray text-sm leading-relaxed mb-5">
-                  {area.description}
-                </p>
+                <div className="p-5 sm:p-6">
+                  <p className="text-medium-gray text-sm leading-relaxed mb-4">
+                    {area.description}
+                  </p>
 
-                <Button
-                  variant="ghost"
-                  onClick={() => handleLearnMore(area.title)}
-                  className="text-dusty-rose hover:text-deep-rose hover:bg-blush p-0 h-auto text-sm font-medium group/btn"
-                >
-                  Learn More
-                  <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                </Button>
+                  {/* Service tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {area.details.map((detail) => (
+                      <span
+                        key={detail}
+                        className="text-xs px-2.5 py-1 bg-blush/60 text-charcoal/70 rounded-full font-medium"
+                      >
+                        {detail}
+                      </span>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant="ghost"
+                    className="text-dusty-rose hover:text-deep-rose hover:bg-blush p-0 h-auto text-sm font-medium group/btn"
+                  >
+                    Schedule a Consultation
+                    <ArrowRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
+                  </Button>
+                </div>
               </div>
             </motion.div>
           ))}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Quote, ChevronLeft, ChevronRight, MessageSquarePlus } from 'lucide-react'
+import { Quote, ChevronLeft, ChevronRight, MessageSquarePlus, ExternalLink, Star, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import StarRating from '@/components/shared/StarRating'
 import SectionWrapper from '@/components/shared/SectionWrapper'
@@ -20,6 +20,7 @@ interface Review {
 export default function TestimonialsSection() {
   const [reviews, setReviews] = useState<Review[]>([])
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [showGoogleModal, setShowGoogleModal] = useState(false)
   const { setView } = useAppStore()
 
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function TestimonialsSection() {
   if (reviews.length === 0) return null
 
   const currentReview = reviews[currentIndex]
+  const googleMapsUrl = 'https://www.google.com/maps/place/Mayer+Law+P.A./@28.6278,-81.3635,15z'
 
   return (
     <SectionWrapper id="testimonials" className="bg-white">
@@ -58,7 +60,16 @@ export default function TestimonialsSection() {
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-charcoal mb-4">
             What Our Clients Say
           </h2>
-          <div className="accent-line mx-auto" />
+          <div className="accent-line mx-auto mb-6" />
+          <Button
+            variant="outline"
+            onClick={() => setShowGoogleModal(true)}
+            className="border-dusty-rose/30 text-dusty-rose hover:bg-dusty-rose hover:text-white rounded-full px-5 text-sm"
+          >
+            <Star className="w-4 h-4 mr-2 fill-dusty-rose" />
+            See Our Google Reviews
+            <ExternalLink className="w-3.5 h-3.5 ml-2" />
+          </Button>
         </div>
 
         {/* Carousel */}
@@ -151,6 +162,69 @@ export default function TestimonialsSection() {
           </div>
         </div>
       </div>
+
+      {/* Google Reviews Modal */}
+      <AnimatePresence>
+        {showGoogleModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-charcoal/60 backdrop-blur-sm"
+            onClick={() => setShowGoogleModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-6 sm:p-8 relative"
+            >
+              <button
+                onClick={() => setShowGoogleModal(false)}
+                className="absolute top-4 right-4 p-2 rounded-full hover:bg-cream transition-colors text-medium-gray"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              <div className="text-center mb-6">
+                <div className="flex items-center justify-center gap-1 mb-3">
+                  {[1,2,3,4,5].map(i => (
+                    <Star key={i} className="w-6 h-6 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <h3 className="font-serif text-2xl font-bold text-charcoal mb-2">
+                  Excellent Reviews on Google
+                </h3>
+                <p className="text-medium-gray text-sm">
+                  Our clients speak for themselves. Read our reviews on Google.
+                </p>
+              </div>
+
+              {/* Sample reviews preview */}
+              <div className="space-y-3 mb-6 max-h-60 overflow-y-auto">
+                {reviews.slice(0, 3).map((review) => (
+                  <div key={review.id} className="p-3 bg-cream rounded-xl">
+                    <div className="flex items-center gap-2 mb-1">
+                      <StarRating rating={review.rating} size={12} />
+                      <span className="text-xs font-medium text-charcoal">{review.clientName}</span>
+                    </div>
+                    <p className="text-xs text-medium-gray line-clamp-2">{review.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                onClick={() => window.open(googleMapsUrl, '_blank', 'noopener,noreferrer')}
+                className="w-full bg-dusty-rose hover:bg-deep-rose text-white rounded-full py-5 font-semibold"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Read All Reviews on Google
+              </Button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SectionWrapper>
   )
 }
