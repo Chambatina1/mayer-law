@@ -1,35 +1,27 @@
 ---
 Task ID: 1
 Agent: Main Agent
-Task: Build complete Mayer Law professional ecosystem
+Task: Fix Mayer Law site — remove Prisma, add dual-mode DB, deploy to Vercel
 
 Work Log:
-- Scraped current website mayerlawflorida.com using web reader
-- Downloaded real assets: logo, favicon, attorney photo, practice area icons, about image
-- Generated 6 elegant minimalist abstract images (no AI models): hero bg, justice, gavel, handshake, docs, building, pattern
-- Delegated full ecosystem build to full-stack-developer subagent
+- Analyzed project state: Prisma fully removed from runtime code but deps/scripts/directory still present
+- Removed prisma/ directory, db/custom.db SQLite file
+- Cleaned package.json: removed @prisma/client, prisma, next-auth, prisma scripts
+- Rewrote src/lib/db.ts with dual-mode support:
+  - In-memory store (globalThis) for Vercel serverless
+  - SQLite via bun:sqlite for local persistent storage
+  - Same API surface: db.appointment.findMany(), etc.
+- Added DATABASE_TYPE=sqlite env variable to toggle modes
+- Created .env.example (documentation) and .env.local (local SQLite enabled)
+- Added /data/ to .gitignore for local DB files
+- Fixed appointments/[id] DELETE handler to use new db.appointment.delete()
+- Verified bun:sqlite works with bun runtime
+- Deployed to Vercel production (3 successful deployments)
+- Pushed all changes to GitHub
 
 Stage Summary:
-- Complete 5-view ecosystem built: Public Website, Booking System, Review System, Client Portal, Admin Panel
-- 18 functional API routes, 8 database models, warm pastel color theme
-- PWA manifest for mobile app experience
-- Zero lint errors, clean compilation
-
----
-Task ID: 2
-Agent: Main Agent
-Task: Apply Blush & Charcoal palette and deploy final ecosystem
-
-Work Log:
-- Replaced palette selector page.tsx with main ecosystem router
-- Added missing color aliases to globals.css (soft-gold, warm-gold, dark-gold, beige, soft-rose) for component compatibility
-- Fixed BookingPage method references (setBookingDetails → setBookingField)
-- Fixed syntax error in client/dashboard API route (missing closing parenthesis)
-- Verified lint passes with zero errors
-- Verified site compiles and returns HTTP 200
-
-Stage Summary:
-- Final Mayer Law ecosystem is live with Blush & Charcoal palette
-- 5 views: Public Website (Hero, Practice Areas, Stats, About, Testimonials, CTA, Contact), Booking System, Review System, Client Portal, Admin Panel
-- All views route correctly via Zustand state management
-- Demo: admin password = "mayer2025", client portal uses email-based magic login
+- Site live at: https://my-project-steel-six.vercel.app
+- GitHub: https://github.com/Chambatina1/mayer-law
+- Architecture: Vercel (in-memory) for public site + Local SQLite (bun:sqlite) for lawyer's data
+- Lawyer runs `bun run dev` locally → data persists in data/mayer_law.db
+- No client data ever leaves the lawyer's computer
