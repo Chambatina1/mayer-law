@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Calendar, ArrowRight, Phone, Mail } from 'lucide-react'
+import { Calendar, ArrowRight, Phone, Mail, MapPin, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAppStore } from '@/store/useAppStore'
 
@@ -18,61 +18,94 @@ export default function HeroSection() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Ocean gradient background */}
+      {/* Ocean background */}
       <div className="absolute inset-0">
         <img
-          src="/mayer-assets/ocean-gradient-bg.png"
+          src="/mayer-assets/ocean-bg-hero.png"
           alt=""
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/30 via-charcoal/20 to-charcoal/50" />
+        {/* Strong overlay for text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 pb-8">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          {/* Accent line */}
-          <div className="accent-line mx-auto mb-6" />
+          {/* Top badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white/90 text-xs sm:text-sm tracking-wider uppercase mb-8"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            AVAILABLE FOR CONSULTATION
+          </motion.div>
+
+          {/* Main headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4"
+          >
+            Mayer Law Is Here{' '}
+            <span className="text-rose-gradient">For You</span>
+          </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-sm sm:text-base tracking-[0.15em] uppercase text-dusty-rose mb-4 font-medium"
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl sm:text-2xl text-white/90 font-medium mb-2"
           >
-            Mayer Law Is Here For You
+            Resourcefully Relentless Legal Representation
           </motion.p>
 
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Resourcefully{' '}
-            <span className="text-rose-gradient">Relentless.</span>
-          </h1>
-
-          <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto mb-4 leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto mb-8 leading-relaxed"
+          >
             Protecting your rights. Empowering your future.
-          </p>
+          </motion.p>
 
-          {/* Key value props */}
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-10 text-white/70 text-sm">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
-              Flexible, Value-Driven Approach
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
-              Client-Focused Solutions
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
-              100% No Obligation
-            </span>
-          </div>
+          {/* Value proposition badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10"
+          >
+            {[
+              '100% No Obligation',
+              'Free Honest Case Review',
+              'Flexible, Value-Driven Approach',
+              'Client-Focused Solutions',
+            ].map((phrase) => (
+              <span
+                key={phrase}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/15 rounded-full text-white/90 text-xs sm:text-sm font-medium"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
+                {phrase}
+              </span>
+            ))}
+          </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Main CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          >
             <Button
               onClick={() => setView('booking')}
               size="lg"
@@ -88,39 +121,68 @@ export default function HeroSection() {
               onClick={() => handleNavClick('#practice-areas')}
               className="rounded-full px-8 py-6 text-base border-white/30 text-white hover:bg-white hover:text-charcoal transition-all"
             >
-              View Practice Areas
+              View Our Services
             </Button>
-          </div>
+          </motion.div>
 
-          {/* Direct contact */}
+          {/* Three ways to reach us */}
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="max-w-3xl mx-auto"
+          >
+            <p className="text-white/50 text-xs tracking-[0.2em] uppercase mb-5 font-medium">
+              Three Ways to Reach Us
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {/* Phone */}
+              <a
+                href="tel:3524943657"
+                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+              >
+                <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
+                  <Phone className="w-5 h-5 text-white" />
+                </div>
+                <p className="text-white/90 text-sm font-semibold">Call Us Directly</p>
+                <p className="text-white/60 text-xs">(352) 494-3657</p>
+              </a>
+
+              {/* Email */}
+              <a
+                href="mailto:Nicole@MayerLawFlorida.com"
+                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+              >
+                <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
+                  <Mail className="w-5 h-5 text-white" />
+                </div>
+                <p className="text-white/90 text-sm font-semibold">Send an Email</p>
+                <p className="text-white/60 text-xs">Nicole@MayerLawFlorida.com</p>
+              </a>
+
+              {/* In-Person / Online */}
+              <button
+                onClick={() => setView('booking')}
+                className="group flex flex-col items-center gap-2 p-5 bg-white/8 backdrop-blur-sm border border-white/12 rounded-2xl hover:bg-white/15 hover:border-white/25 transition-all"
+              >
+                <div className="w-12 h-12 rounded-full bg-dusty-rose/80 flex items-center justify-center group-hover:bg-dusty-rose transition-colors">
+                  <MapPin className="w-5 h-5 text-white" />
+                </div>
+                <p className="text-white/90 text-sm font-semibold">Book Online</p>
+                <p className="text-white/60 text-xs">In-Person & Virtual</p>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Consultation note */}
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-8 text-white/60 text-sm"
+            transition={{ delay: 1.3, duration: 0.6 }}
+            className="mt-8 text-white/40 text-xs tracking-wide max-w-md mx-auto"
           >
-            <a href="tel:3524943657" className="flex items-center gap-2 hover:text-white transition-colors">
-              <Phone className="w-4 h-4" />
-              (352) 494-3657
-            </a>
-            <a href="mailto:Nicole@MayerLawFlorida.com" className="flex items-center gap-2 hover:text-white transition-colors">
-              <Mail className="w-4 h-4" />
-              Nicole@MayerLawFlorida.com
-            </a>
-          </motion.div>
-
-          {/* Available for consultation badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="mt-8 inline-block"
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/90 text-xs sm:text-sm tracking-wider uppercase">
-              <span className="w-2 h-2 rounded-full bg-sage animate-pulse" />
-              Available for Consultation
-            </span>
-          </motion.div>
+            Most clients prefer in-person consultations. Virtual appointments also available upon request.
+          </motion.p>
         </motion.div>
 
         {/* Scroll indicator */}

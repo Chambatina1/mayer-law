@@ -19,6 +19,7 @@ const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#practice-areas' },
   { label: 'Reviews', href: '#testimonials' },
+  { label: 'Social', href: '#social' },
   { label: 'Contact', href: '#contact' },
 ]
 

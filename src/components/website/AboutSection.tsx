@@ -35,7 +35,7 @@ export default function AboutSection() {
     <SectionWrapper id="about" className="bg-cream pattern-warm">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Photo */}
+          {/* Photo — larger and more prominent */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -44,25 +44,56 @@ export default function AboutSection() {
             className="relative"
           >
             <div className="relative">
-              <div className="absolute -inset-3 bg-gradient-to-br from-dusty-rose/20 to-sand rounded-2xl" />
+              {/* Animated gradient border */}
+              <motion.div
+                className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-dusty-rose/30 via-sand to-dusty-rose/20"
+                animate={{
+                  background: [
+                    'linear-gradient(135deg, rgba(193,123,110,0.3) 0%, rgba(224,213,207,1) 50%, rgba(193,123,110,0.2) 100%)',
+                    'linear-gradient(135deg, rgba(193,123,110,0.2) 0%, rgba(200,192,184,1) 50%, rgba(193,123,110,0.3) 100%)',
+                    'linear-gradient(135deg, rgba(193,123,110,0.3) 0%, rgba(224,213,207,1) 50%, rgba(193,123,110,0.2) 100%)',
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              />
+              {/* Subtle glow */}
+              <motion.div
+                className="absolute -inset-2 rounded-2xl opacity-40"
+                animate={{
+                  boxShadow: [
+                    '0 0 20px rgba(193,123,110,0.15)',
+                    '0 0 40px rgba(193,123,110,0.25)',
+                    '0 0 20px rgba(193,123,110,0.15)',
+                  ],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              />
               <Image
                 src="/mayer-assets/attorney.jpg"
                 alt="Attorney Nicole Mayer"
-                width={500}
+                width={600}
                 height={600}
-                className="relative rounded-2xl shadow-xl w-full h-auto object-cover aspect-[5/6]"
+                className="relative rounded-2xl shadow-xl w-full h-auto object-cover aspect-[4/5]"
               />
             </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border border-sand">
-              <div className="flex items-center gap-2">
-                <Award className="w-5 h-5 text-dusty-rose" />
+            {/* Floating badge — more visible */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="absolute -bottom-5 -right-5 bg-white rounded-xl shadow-lg p-4 border-2 border-dusty-rose/20"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-dusty-rose/10 flex items-center justify-center">
+                  <Award className="w-5 h-5 text-dusty-rose" />
+                </div>
                 <div>
-                  <p className="text-xs font-bold text-charcoal">20+ Years</p>
-                  <p className="text-[10px] text-medium-gray">Legal Experience</p>
+                  <p className="text-sm font-bold text-charcoal">20+ Years</p>
+                  <p className="text-xs text-medium-gray font-medium">Legal Experience</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
 
           {/* Content */}
@@ -81,7 +112,7 @@ export default function AboutSection() {
             <div className="accent-line mb-6" />
 
             <p className="text-medium-gray leading-relaxed mb-4">
-              Founded by Nicole Mayer in 2020, Mayer Law brings over 20 years of legal experience to every case. Based in Maitland, Florida, we specialize in Consumer Finance, Education Law & Civil Rights, Personal Injury, and General Litigation.
+              Founded by Nicole Mayer in 2020, Mayer Law, P.A. brings over 20 years of legal experience to every case. Based in Maitland, Florida, we specialize in Consumer Finance, Education Law & Civil Rights, Personal Injury, and General Litigation.
             </p>
             <p className="text-medium-gray leading-relaxed mb-8">
               Our approach is simple: we fight for what is right with resourceful strategies and relentless determination. Every client deserves an attorney who will go the distance — and that is exactly what we deliver.

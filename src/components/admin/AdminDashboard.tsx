@@ -542,92 +542,180 @@ export default function AdminDashboard() {
             </div>
           </TabsContent>
 
-          {/* Social Media Monitoring */}
+          {/* Social Media Posting & Marketing */}
           <TabsContent value="social">
-            <div className="bg-white rounded-2xl border border-beige p-6 mt-6 space-y-6">
-              <div className="flex items-center justify-between">
-                <h3 className="font-serif text-lg font-semibold text-charcoal">Social Media & Marketing</h3>
-                <span className="text-xs text-medium-gray bg-cream px-3 py-1 rounded-full">Quick Overview</span>
-              </div>
-
-              {/* Social accounts */}
-              <div className="grid sm:grid-cols-3 gap-4">
-                {[
-                  { name: 'Facebook', handle: '@MayerLawFlorida', url: 'https://facebook.com/MayerLawFlorida', color: 'bg-blue-50 text-blue-600 border-blue-100', icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
-                  { name: 'Instagram', handle: '@MayerLawFlorida', url: 'https://instagram.com/MayerLawFlorida', color: 'bg-pink-50 text-pink-600 border-pink-100', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
-                  { name: 'TikTok', handle: '@MayerLawFlorida', url: 'https://tiktok.com/@MayerLawFlorida', color: 'bg-slate-50 text-slate-700 border-slate-200', icon: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z' },
-                ].map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-3 p-4 rounded-xl border ${social.color} hover:shadow-md transition-all group`}
-                  >
-                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d={social.icon} /></svg>
-                    <div className="flex-1">
-                      <p className="font-medium text-sm text-charcoal">{social.name}</p>
-                      <p className="text-xs text-medium-gray">{social.handle}</p>
-                    </div>
-                    <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
-                ))}
-              </div>
-
-              {/* Google Reviews link */}
-              <div className="p-4 rounded-xl border border-beige bg-amber-50/50">
+            <div className="space-y-6 mt-6">
+              {/* Post Composer */}
+              <div className="bg-white rounded-2xl border border-beige p-6 space-y-5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
-                    <div>
-                      <p className="font-medium text-sm text-charcoal">Google Reviews</p>
-                      <p className="text-xs text-medium-gray">Monitor and respond to client reviews</p>
-                    </div>
+                  <h3 className="font-serif text-lg font-semibold text-charcoal">Create a Post</h3>
+                  <span className="text-xs text-medium-gray bg-cream px-3 py-1 rounded-full">Write once, share everywhere</span>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-charcoal mb-1.5 block">Post Content</Label>
+                  <Textarea
+                    placeholder="What do you want to share with your audience? Legal tips, news, case victories..."
+                    rows={4}
+                    className="border-beige rounded-xl resize-none"
+                    id="social-post-content"
+                  />
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-charcoal mb-1.5 block">Image URL (optional)</Label>
+                  <Input
+                    placeholder="https://example.com/image.jpg"
+                    className="border-beige rounded-xl"
+                    id="social-post-image"
+                  />
+                  <p className="text-xs text-light-gray mt-1">Tip: Use images of your office, legal tips graphics, or team photos for better engagement.</p>
+                </div>
+
+                <div>
+                  <Label className="text-sm font-medium text-charcoal mb-2 block">Share to</Label>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      { name: 'Facebook', color: 'border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100', icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
+                      { name: 'Instagram', color: 'border-pink-200 bg-pink-50 text-pink-700 hover:bg-pink-100', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
+                      { name: 'TikTok', color: 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100', icon: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z' },
+                    ].map((social) => (
+                      <button
+                        key={social.name}
+                        onClick={() => {
+                          const content = (document.getElementById('social-post-content') as HTMLTextAreaElement)?.value || ''
+                          const imageUrl = (document.getElementById('social-post-image') as HTMLInputElement)?.value || ''
+                          const encodedText = encodeURIComponent(content + (imageUrl ? `\n\n${imageUrl}` : ''))
+                          const url = social.name === 'Facebook'
+                            ? `https://www.facebook.com/MayerLawFlorida`
+                            : social.name === 'Instagram'
+                            ? `https://www.instagram.com/MayerLawFlorida`
+                            : `https://www.tiktok.com/@MayerLawFlorida`
+
+                          if (content.trim()) {
+                            navigator.clipboard.writeText(content + (imageUrl ? `\n\n${imageUrl}` : ''))
+                            toast.success(`Post copied! Open ${social.name} and paste it.`, { description: 'Content copied to clipboard.' })
+                          }
+                          window.open(url, '_blank', 'noopener,noreferrer')
+                        }}
+                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border text-sm font-medium transition-all ${social.color}`}
+                      >
+                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d={social.icon} /></svg>
+                        {social.name}
+                      </button>
+                    ))}
                   </div>
-                  <a
-                    href="https://www.google.com/maps/place/Mayer+Law+P.A./@28.6278,-81.3635,15z"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-amber-600 hover:text-amber-700 font-medium flex items-center gap-1"
-                  >
-                    View <ExternalLink className="w-3 h-3" />
-                  </a>
+                  <p className="text-xs text-light-gray mt-2">Click to copy your post to clipboard and open the platform to publish.</p>
+                </div>
+
+                {/* Post Templates */}
+                <div>
+                  <Label className="text-sm font-medium text-charcoal mb-2 block">Quick Post Templates</Label>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {[
+                      { label: 'Legal Tip of the Day', template: 'Did you know? [YOUR LEGAL TIP]\n\nProtecting your rights is what we do at Mayer Law. Contact us for a consultation: (352) 494-3657\n\n#LegalTips #MayerLaw #FloridaLawyer' },
+                      { label: 'Client Success Story', template: 'Another satisfied client! Thank you for trusting Mayer Law with your case.\n\n[CLIENT FIRST NAME ONLY] came to us with [BRIEF DESCRIPTION]. We fought for justice and delivered results.\n\nNeed help? Call us: (352) 494-3657\n\n#ClientSuccess #MayerLaw' },
+                      { label: 'Office Update', template: 'Exciting news from Mayer Law! [YOUR UPDATE]\n\nWe are committed to serving our community with excellence. Visit us in Maitland, FL or schedule a consultation online.\n\n(352) 494-3657 | Nicole@MayerLawFlorida.com\n\n#MayerLaw #MaitlandFL' },
+                      { label: 'Practice Area Spotlight', template: '[PRACTICE AREA]: What you need to know.\n\n[BRIEF EXPLANATION IN SIMPLE TERMS]\n\nIf you are dealing with [ISSUE], you do not have to face it alone. Mayer Law is here to help.\n\nSchedule a consultation: (352) 494-3657\n\n#LegalHelp #MayerLawFlorida' },
+                    ].map((tpl) => (
+                      <button
+                        key={tpl.label}
+                        onClick={() => {
+                          const textarea = document.getElementById('social-post-content') as HTMLTextAreaElement
+                          if (textarea) textarea.value = tpl.template
+                        }}
+                        className="text-left p-3 rounded-xl border border-beige hover:border-soft-gold/30 hover:bg-cream/50 transition-colors"
+                      >
+                        <p className="text-xs font-medium text-charcoal">{tpl.label}</p>
+                        <p className="text-[10px] text-light-gray mt-0.5 line-clamp-2">{tpl.template}</p>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Quick Marketing Actions */}
-              <div>
-                <h4 className="font-medium text-sm text-charcoal mb-3 flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-dusty-rose" />
-                  Quick Marketing Actions
-                </h4>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <Button variant="outline" className="border-beige rounded-xl text-sm h-auto py-3 justify-start" onClick={() => setView('review')}>
-                    <MessageSquare className="w-4 h-4 mr-2 text-dusty-rose" />
-                    Request a Review
-                  </Button>
-                  <a
-                    href="https://www.google.com/maps/place/Mayer+Law+P.A./@28.6278,-81.3635,15z"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-3 border border-beige rounded-xl text-sm hover:bg-cream transition-colors"
-                  >
-                    <Star className="w-4 h-4 text-amber-500" />
-                    Share Google Review Link
-                  </a>
-                  <a
-                    href="https://facebook.com/MayerLawFlorida"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-3 border border-beige rounded-xl text-sm hover:bg-cream transition-colors"
-                  >
-                    <Share2 className="w-4 h-4 text-blue-500" />
-                    Share on Facebook
-                  </a>
-                  <Button variant="outline" className="border-beige rounded-xl text-sm h-auto py-3 justify-start" onClick={() => navigator.clipboard.writeText('https://my-project-steel-six.vercel.app')}>
-                    <ExternalLink className="w-4 h-4 mr-2 text-dusty-rose" />
-                    Copy Website Link
-                  </Button>
+              {/* Social accounts links */}
+              <div className="bg-white rounded-2xl border border-beige p-6 space-y-5">
+                <h3 className="font-serif text-lg font-semibold text-charcoal">Connected Accounts</h3>
+
+                <div className="grid sm:grid-cols-3 gap-4">
+                  {[
+                    { name: 'Facebook', handle: '@MayerLawFlorida', url: 'https://facebook.com/MayerLawFlorida', color: 'bg-blue-50 text-blue-600 border-blue-100', icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z' },
+                    { name: 'Instagram', handle: '@MayerLawFlorida', url: 'https://instagram.com/MayerLawFlorida', color: 'bg-pink-50 text-pink-600 border-pink-100', icon: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' },
+                    { name: 'TikTok', handle: '@MayerLawFlorida', url: 'https://tiktok.com/@MayerLawFlorida', color: 'bg-slate-50 text-slate-700 border-slate-200', icon: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z' },
+                  ].map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-3 p-4 rounded-xl border ${social.color} hover:shadow-md transition-all group`}
+                    >
+                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d={social.icon} /></svg>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm text-charcoal">{social.name}</p>
+                        <p className="text-xs text-medium-gray">{social.handle}</p>
+                      </div>
+                      <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  ))}
+                </div>
+
+                {/* Google Reviews link */}
+                <div className="p-4 rounded-xl border border-beige bg-amber-50/50">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
+                      <div>
+                        <p className="font-medium text-sm text-charcoal">Google Reviews</p>
+                        <p className="text-xs text-medium-gray">Monitor and respond to client reviews</p>
+                      </div>
+                    </div>
+                    <a
+                      href="https://www.google.com/maps/place/Mayer+Law+P.A./@28.6278,-81.3635,15z"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-amber-600 hover:text-amber-700 font-medium flex items-center gap-1"
+                    >
+                      View <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Quick Marketing Actions */}
+                <div>
+                  <h4 className="font-medium text-sm text-charcoal mb-3 flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-dusty-rose" />
+                    Quick Marketing Actions
+                  </h4>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <Button variant="outline" className="border-beige rounded-xl text-sm h-auto py-3 justify-start" onClick={() => setView('review')}>
+                      <MessageSquare className="w-4 h-4 mr-2 text-dusty-rose" />
+                      Request a Review
+                    </Button>
+                    <a
+                      href="https://www.google.com/maps/place/Mayer+Law+P.A./@28.6278,-81.3635,15z"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-3 border border-beige rounded-xl text-sm hover:bg-cream transition-colors"
+                    >
+                      <Star className="w-4 h-4 text-amber-500" />
+                      Share Google Review Link
+                    </a>
+                    <a
+                      href="https://facebook.com/MayerLawFlorida"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-3 border border-beige rounded-xl text-sm hover:bg-cream transition-colors"
+                    >
+                      <Share2 className="w-4 h-4 text-blue-500" />
+                      Open Facebook Page
+                    </a>
+                    <Button variant="outline" className="border-beige rounded-xl text-sm h-auto py-3 justify-start" onClick={() => navigator.clipboard.writeText(window.location.origin)}>
+                      <ExternalLink className="w-4 h-4 mr-2 text-dusty-rose" />
+                      Copy Website Link
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

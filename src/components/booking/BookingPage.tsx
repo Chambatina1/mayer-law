@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, ArrowRight, Check, Calendar, Clock, User, FileText, Phone,
-  CreditCard, Users, Briefcase, AlertCircle
+  CreditCard, Users, Briefcase, AlertCircle, MapPin, Info
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -155,7 +155,7 @@ export default function BookingPage() {
                     {isCompleted ? <Check className="w-4 h-4" /> : stepNum}
                   </div>
                   <span className={`hidden sm:inline text-xs font-medium ${
-                    isActive ? 'text-soft-gold' : 'text-light-gray'
+                    isActive ? 'text-soft-gold' : 'text-medium-gray'
                   }`}>
                     {step.label}
                   </span>
@@ -184,7 +184,16 @@ export default function BookingPage() {
               transition={{ duration: 0.3 }}
             >
               <h2 className="font-serif text-2xl font-bold text-charcoal mb-2">What do you need help with?</h2>
-              <p className="text-medium-gray mb-8">Choose a practice area for your consultation.</p>
+              <p className="text-medium-gray mb-4">Choose a practice area for your consultation.</p>
+              <div className="bg-cream rounded-xl p-4 mb-6 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg bg-blush flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4 text-dusty-rose" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-charcoal">In-Person & Virtual Available</p>
+                  <p className="text-xs text-medium-gray mt-0.5">Most clients prefer in-person consultations at our Maitland office. Virtual appointments are also available upon request.</p>
+                </div>
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {services.map((s) => (
@@ -235,14 +244,14 @@ export default function BookingPage() {
                       nav_button: 'h-8 w-8 rounded-lg bg-beige/50 hover:bg-beige text-charcoal inline-flex items-center justify-center',
                       month_grid: 'w-full border-collapse',
                       weekdays: 'flex',
-                      weekday: 'text-xs font-medium text-light-gray w-9 text-center',
+                      weekday: 'text-xs font-medium text-charcoal/60 w-9 text-center',
                       week: 'flex w-full mt-2',
                       day: 'h-9 w-9 text-center text-sm relative mx-auto',
                       day_button: 'h-9 w-9 rounded-lg hover:bg-beige/60 flex items-center justify-center text-charcoal',
                       selected: 'bg-soft-gold text-white hover:bg-soft-gold hover:text-white',
                       today: 'bg-beige/40',
-                      disabled: 'text-light-gray opacity-40',
-                      outside: 'text-light-gray opacity-30',
+                      disabled: 'text-medium-gray opacity-40',
+                      outside: 'text-medium-gray opacity-30',
                       range_middle: 'bg-beige/30',
                     }}
                   />
@@ -264,7 +273,7 @@ export default function BookingPage() {
               <p className="text-medium-gray mb-2">
                 {selectedDate && format(new Date(selectedDate + 'T00:00:00'), 'EEEE, MMMM d, yyyy')}
               </p>
-              <p className="text-light-gray text-sm mb-8">Available slots in 30-minute intervals, 9 AM – 5 PM.</p>
+              <p className="text-medium-gray text-sm mb-8">Available slots in 30-minute intervals, 9 AM – 5 PM.</p>
 
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3">
                 {timeSlots.map((time) => (
@@ -333,7 +342,7 @@ export default function BookingPage() {
                 </div>
                 <div>
                   <Label htmlFor="bk-notes" className="text-charcoal text-sm font-medium mb-1.5 block">
-                    Brief case description <span className="text-light-gray font-normal">(optional)</span>
+                    Brief case description <span className="text-medium-gray font-normal">(optional)</span>
                   </Label>
                   <Textarea
                     id="bk-notes"
@@ -381,14 +390,14 @@ export default function BookingPage() {
                   <div className="flex items-center gap-3">
                     <Briefcase className="w-5 h-5 text-soft-gold shrink-0" />
                     <div>
-                      <p className="text-xs text-light-gray uppercase tracking-wider">Service</p>
+                      <p className="text-xs text-medium-gray uppercase tracking-wider">Service</p>
                       <p className="text-sm font-medium text-charcoal">{selectedService}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Calendar className="w-5 h-5 text-soft-gold shrink-0" />
                     <div>
-                      <p className="text-xs text-light-gray uppercase tracking-wider">Date</p>
+                      <p className="text-xs text-medium-gray uppercase tracking-wider">Date</p>
                       <p className="text-sm font-medium text-charcoal">
                         {selectedDate && format(new Date(selectedDate + 'T00:00:00'), 'EEEE, MMMM d, yyyy')}
                       </p>
@@ -397,25 +406,36 @@ export default function BookingPage() {
                   <div className="flex items-center gap-3">
                     <Clock className="w-5 h-5 text-soft-gold shrink-0" />
                     <div>
-                      <p className="text-xs text-light-gray uppercase tracking-wider">Time</p>
+                      <p className="text-xs text-medium-gray uppercase tracking-wider">Time</p>
                       <p className="text-sm font-medium text-charcoal">{selectedTime}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <User className="w-5 h-5 text-soft-gold shrink-0" />
                     <div>
-                      <p className="text-xs text-light-gray uppercase tracking-wider">Name</p>
+                      <p className="text-xs text-medium-gray uppercase tracking-wider">Name</p>
                       <p className="text-sm font-medium text-charcoal">{bookingName}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Reminders */}
-                <div className="bg-beige/50 rounded-xl p-4 mb-8">
+                <div className="bg-beige/50 rounded-xl p-4 mb-4">
                   <p className="text-xs text-medium-gray font-medium mb-2">You&apos;ll receive reminders at:</p>
                   <div className="flex items-center justify-center gap-6 text-sm text-charcoal">
-                    <span>📧 24 hours before</span>
-                    <span>📧 1 hour before</span>
+                    <span>24 hours before</span>
+                    <span>1 hour before</span>
+                  </div>
+                </div>
+
+                {/* Pricing note */}
+                <div className="bg-dusty-rose/5 border border-dusty-rose/20 rounded-xl p-4 mb-8">
+                  <div className="flex items-start gap-3">
+                    <Info className="w-4 h-4 text-dusty-rose shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-medium text-charcoal">Consultation Fee</p>
+                      <p className="text-xs text-medium-gray mt-0.5">All legal services have a fee. Attorney Mayer will discuss pricing during your consultation based on your specific case needs.</p>
+                    </div>
                   </div>
                 </div>
 

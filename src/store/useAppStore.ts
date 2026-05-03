@@ -63,6 +63,10 @@ interface AppState {
   // Active section for smooth scroll
   activeSection: string
   setActiveSection: (section: string) => void
+
+  // Practice area detail view
+  activePracticeArea: string | null
+  setActivePracticeArea: (area: string | null) => void
 }
 
 const bookingInitialState = {
@@ -131,4 +135,8 @@ export const useAppStore = create<AppState>((set) => ({
   // Active section
   activeSection: 'home',
   setActiveSection: (section) => set({ activeSection: section }),
+
+  // Practice area detail view
+  activePracticeArea: null,
+  setActivePracticeArea: (area) => set({ activePracticeArea: area }),
 }))

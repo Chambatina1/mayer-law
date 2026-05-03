@@ -9,6 +9,7 @@ import AboutSection from '@/components/website/AboutSection'
 import StatsSection from '@/components/website/StatsSection'
 import TestimonialsSection from '@/components/website/TestimonialsSection'
 import CTABanner from '@/components/website/CTABanner'
+import SocialMediaSection from '@/components/website/SocialMediaSection'
 import ContactSection from '@/components/website/ContactSection'
 import Footer from '@/components/website/Footer'
 import BookingPage from '@/components/booking/BookingPage'
@@ -34,6 +35,7 @@ function WebsiteView() {
         <StatsSection />
         <AboutSection />
         <TestimonialsSection />
+        <SocialMediaSection />
         <CTABanner />
         <ContactSection />
       </main>

@@ -125,7 +125,7 @@ export default function ContactSection() {
                 <div className="text-center">
                   <MapPin className="w-8 h-8 text-dusty-rose/40 mx-auto mb-2 group-hover:text-dusty-rose transition-colors" />
                   <p className="text-sm text-medium-gray group-hover:text-dusty-rose transition-colors">Maitland, Florida</p>
-                  <p className="text-xs text-medium-gray/60 mt-1">Click to open in Google Maps</p>
+                  <p className="text-xs text-medium-gray mt-1">Click to open in Google Maps</p>
                 </div>
               </div>
             </a>

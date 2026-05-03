@@ -179,7 +179,7 @@ export default function Footer() {
           </p>
           <button
             onClick={() => setView('admin')}
-            className="text-xs text-white/20 hover:text-white/40 transition-colors"
+            className="text-xs text-white/40 hover:text-white/60 transition-colors"
           >
             Admin
           </button>
