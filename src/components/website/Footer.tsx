@@ -18,6 +18,12 @@ const footerLinks = {
     'Personal Injury',
     'General Litigation',
   ],
+  practiceAreaLinks: [
+    { name: 'Consumer Finance Law', href: '#practice-areas' },
+    { name: 'Education Law & Civil Rights', href: '#practice-areas' },
+    { name: 'Personal Injury', href: '#practice-areas' },
+    { name: 'General Litigation', href: '#practice-areas' },
+  ],
 }
 
 export default function Footer() {
@@ -59,10 +65,15 @@ export default function Footer() {
                 <Mail className="w-4 h-4" />
                 Nicole@MayerLawFlorida.com
               </a>
-              <div className="flex items-center gap-2 text-sm text-white/60">
+              <a
+                href="https://maps.google.com/?q=Maitland,+Florida"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-white/60 hover:text-dusty-rose transition-colors"
+              >
                 <MapPin className="w-4 h-4" />
                 Maitland, Florida
-              </div>
+              </a>
             </div>
           </div>
 
@@ -91,9 +102,18 @@ export default function Footer() {
           <div>
             <h4 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">Practice Areas</h4>
             <ul className="space-y-2">
-              {footerLinks.practiceAreas.map((area) => (
-                <li key={area}>
-                  <span className="text-sm text-white/50">{area}</span>
+              {footerLinks.practiceAreaLinks.map((area) => (
+                <li key={area.name}>
+                  <a
+                    href={area.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(area.href)
+                    }}
+                    className="text-sm text-white/50 hover:text-dusty-rose transition-colors"
+                  >
+                    {area.name}
+                  </a>
                 </li>
               ))}
             </ul>

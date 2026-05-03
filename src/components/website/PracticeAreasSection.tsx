@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import SectionWrapper from '@/components/shared/SectionWrapper'
 import Image from 'next/image'
+import { useAppStore } from '@/store/useAppStore'
 
 const practiceAreas = [
   {
@@ -34,6 +35,20 @@ const practiceAreas = [
 ]
 
 export default function PracticeAreasSection() {
+  const { setView } = useAppStore()
+
+  const handleLearnMore = (areaTitle: string) => {
+    // Scroll to contact section and pre-fill the service interest
+    const contactEl = document.querySelector('#contact')
+    if (contactEl) {
+      contactEl.scrollIntoView({ behavior: 'smooth' })
+    }
+    // Also open booking with the area pre-selected
+    setTimeout(() => {
+      setView('booking')
+    }, 600)
+  }
+
   return (
     <SectionWrapper id="practice-areas" className="bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,7 +73,7 @@ export default function PracticeAreasSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <div className="group bg-white border border-sand rounded-2xl p-6 h-full transition-all duration-300 hover:border-dusty-rose hover:shadow-lg hover:shadow-dusty-rose/10 hover:-translate-y-1 cursor-default">
+              <div className="group bg-white border border-sand rounded-2xl p-6 h-full transition-all duration-300 hover:border-dusty-rose hover:shadow-lg hover:shadow-dusty-rose/10 hover:-translate-y-1 cursor-pointer" onClick={() => handleLearnMore(area.title)}>
                 {/* Icon */}
                 <div className="w-14 h-14 rounded-xl bg-blush flex items-center justify-center mb-5 transition-colors group-hover:bg-dusty-rose/10">
                   <Image
@@ -83,6 +98,7 @@ export default function PracticeAreasSection() {
 
                 <Button
                   variant="ghost"
+                  onClick={() => handleLearnMore(area.title)}
                   className="text-dusty-rose hover:text-deep-rose hover:bg-blush p-0 h-auto text-sm font-medium group/btn"
                 >
                   Learn More

@@ -27,7 +27,7 @@ const contactInfo = [
     icon: MapPin,
     label: 'Location',
     value: 'Maitland, Florida',
-    href: null,
+    href: 'https://maps.google.com/?q=Maitland,+Florida',
   },
 ]
 
@@ -114,13 +114,21 @@ export default function ContactSection() {
               </div>
             ))}
 
-            {/* Map placeholder */}
-            <div className="rounded-xl border border-sand overflow-hidden h-48 bg-blush mt-6 flex items-center justify-center">
-              <div className="text-center">
-                <MapPin className="w-8 h-8 text-dusty-rose/40 mx-auto mb-2" />
-                <p className="text-sm text-medium-gray">Maitland, Florida</p>
+            {/* Map link */}
+            <a
+              href="https://maps.google.com/?q=Maitland,+Florida"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl border border-sand overflow-hidden h-48 bg-blush mt-6 hover:border-dusty-rose transition-colors group"
+            >
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <MapPin className="w-8 h-8 text-dusty-rose/40 mx-auto mb-2 group-hover:text-dusty-rose transition-colors" />
+                  <p className="text-sm text-medium-gray group-hover:text-dusty-rose transition-colors">Maitland, Florida</p>
+                  <p className="text-xs text-medium-gray/60 mt-1">Click to open in Google Maps</p>
+                </div>
               </div>
-            </div>
+            </a>
           </motion.div>
 
           {/* Contact Form */}
