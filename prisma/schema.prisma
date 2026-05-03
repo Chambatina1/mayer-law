@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Appointment {
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  phone         String
+  practiceArea  String
+  date          String
+  time          String
+  status        String   @default("pending")
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ContactSubmission {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String?
+  caseType    String?
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+model ClientDocument {
+  id          String   @id @default(cuid())
+  clientEmail String
+  fileName    String
+  fileSize    String?
+  category    String?
+  uploadedAt  DateTime @default(now())
+}
+
+model ClientMessage {
+  id          String   @id @default(cuid())
+  clientEmail String
+  sender      String
+  message     String
+  createdAt   DateTime @default(now())
+}
