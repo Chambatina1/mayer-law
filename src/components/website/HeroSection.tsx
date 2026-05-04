@@ -41,9 +41,9 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 backdrop-blur-md border border-charcoal/10 rounded-full text-charcoal text-xs sm:text-sm tracking-wider uppercase mb-8"
+            className="inline-flex items-center gap-2 px-6 py-2.5 bg-dusty-rose rounded-full text-white text-xs sm:text-sm tracking-wider uppercase mb-8 font-bold shadow-lg"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
             HERE FOR YOU
           </motion.div>
 
@@ -52,11 +52,11 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal leading-tight mb-4"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-charcoal leading-tight mb-4 drop-shadow-sm"
           >
             Mayer Law Florida
             <br />
-            <span className="text-rose-gradient">Available For Consultation</span>
+            <span className="text-rose-gradient text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold">Available For Consultation</span>
           </motion.h1>
 
           <motion.p
@@ -85,17 +85,17 @@ export default function HeroSection() {
             className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10"
           >
             {[
-              '100% No Obligation',
-              'Free Honest Case Review',
-              'Flexible, Value-Driven Approach',
-              'Client-Focused Solutions',
-            ].map((phrase) => (
+              { text: '100% No Obligation', bg: 'bg-emerald-600', icon: 'bg-emerald-300' },
+              { text: 'Free Honest Case Review', bg: 'bg-blue-600', icon: 'bg-blue-300' },
+              { text: 'Flexible, Value-Driven Approach', bg: 'bg-amber-600', icon: 'bg-amber-300' },
+              { text: 'Client-Focused Solutions', bg: 'bg-purple-600', icon: 'bg-purple-300' },
+            ].map(({ text, bg, icon }) => (
               <span
-                key={phrase}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-charcoal/10 rounded-full text-charcoal text-xs sm:text-sm font-medium"
+                key={text}
+                className={`inline-flex items-center gap-2 px-5 py-2.5 ${bg} rounded-full text-white text-xs sm:text-sm font-bold shadow-md`}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-dusty-rose" />
-                {phrase}
+                <span className={`w-1.5 h-1.5 rounded-full ${icon}`} />
+                {text}
               </span>
             ))}
           </motion.div>
