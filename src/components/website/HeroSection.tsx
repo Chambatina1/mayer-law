@@ -44,7 +44,7 @@ export default function HeroSection() {
             className="inline-flex items-center gap-2 px-5 py-2 bg-white/80 backdrop-blur-md border border-charcoal/10 rounded-full text-charcoal text-xs sm:text-sm tracking-wider uppercase mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            AVAILABLE FOR CONSULTATION
+            HERE FOR YOU
           </motion.div>
 
           {/* Main headline */}
@@ -54,8 +54,8 @@ export default function HeroSection() {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-charcoal leading-tight mb-4"
           >
-            Mayer Law Florida Is Here{' '}
-            <span className="text-rose-gradient">For You</span>
+            Mayer Law Florida Is{' '}
+            <span className="text-rose-gradient">Available For Consultation</span>
           </motion.h1>
 
           <motion.p
